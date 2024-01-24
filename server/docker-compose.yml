@@ -1,0 +1,32 @@
+version: '3'
+name: 'web-time-machine'
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+    - './postgres_data:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: web-time-machine
+    ports:
+      - "5432:5432"
+  ngrok:
+    image: wernight/ngrok
+    ports:
+      - "4040:4040"
+    command: ngrok http app:8080 --authtoken ${NGROK_AUTHTOKEN}
+    depends_on:
+      - app
+  app:
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - ../client/Shared (Extension)/content.js:/usr/src/app/content.js
+    environment:
+      - NODE_ENV=development
