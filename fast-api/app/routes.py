@@ -16,6 +16,10 @@ async def get_logs(limit: int = 50, offset: int = 0):
         logging.error('Error while fetching logs:', exc_info=error)
         raise HTTPException(status_code=500, detail="An error occurred while fetching logs")
 
+@router.get("/"){
+    return 'Hello World'
+
+}
 
 @router.post("/")
 async def index(request: Request):
