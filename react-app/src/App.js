@@ -6,6 +6,10 @@ import {
   Link,
   Router
 } from 'react-chrome-extension-router'
+
+import {
+  DEFAULT_DEVICE_NAME
+} from './Constants'
 const LinkToHistory = () => {
   return (
     <p className='text-center'>
@@ -16,7 +20,6 @@ const LinkToHistory = () => {
   )
 }
 
-const DEFAULT_DEVICE_NAME = 'My device'
 
 const App = () => {
   const [deviceName, setDeviceName] = useState(DEFAULT_DEVICE_NAME)
@@ -34,9 +37,9 @@ const App = () => {
         console.log('No chrome.storage, using locastorage')
         localStorage.setItem('deviceName', deviceName)
       }
-    }, 1000) // Espera 1 segundo antes de guardar
+    }, 1000) //this is because chrome.storage.sync.set has a limit
 
-    return () => clearTimeout(timerId) // Limpia el timeout si el componente se desmonta o si deviceName cambia de nuevo
+    return () => clearTimeout(timerId) // clear the timeout just in case
   }, [deviceName])
 
   useEffect(() => {
@@ -46,28 +49,27 @@ const App = () => {
       chrome.storage.sync.get('deviceName').then(function (result) {
         console.log('deviceName in storage', result.deviceName)
         if (deviceName !== result.deviceName) {
-          if (result.deviceName === DEFAULT_DEVICE_NAME) {
+          if (result.deviceName !== DEFAULT_DEVICE_NAME) {
             goTo(LogsMain, { message: 'Welcome to the extension' })
           }
           setDeviceName(result.deviceName || DEFAULT_DEVICE_NAME)
         }
       })
     } else {
-      console.log('No chrome.storage, using locastorage')
       const deviceName = localStorage.getItem('deviceName')
-      if (deviceName === DEFAULT_DEVICE_NAME) {
+      console.log('No chrome.storage, using locastorage', deviceName)
+      if (deviceName !== DEFAULT_DEVICE_NAME) {
         goTo(LogsMain, { message: 'Welcome to the extension' })
       }
       setDeviceName(deviceName || DEFAULT_DEVICE_NAME)
     }
-  }, []) // Array de dependencias vacío para ejecutar solo en el montaje
+  }, [])
 
   if (/Mobi|Android/i.test(navigator.userAgent)) {
     document.querySelector('html').classList.add('mobile')
   } else {
     document.querySelector('html').classList.add('desktop')
   }
-  // detecta si es un dispositivo apple tanto mac como iphone o ipad
   if (/Mac|iPhone|iPod|iPad/i.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) {
     document.querySelector('html').classList.add('apple-device')
   }
@@ -81,6 +83,13 @@ const App = () => {
     // const components = getComponentStack();
     // console.log(`The stack has ${components.length} components on the stack`);
   })
+
+  const deviceNameKeyPress = (e) => {
+    if (e === "Enter") {
+      goTo(LogsMain, { message: 'Welcome to the extension' })
+    }
+  }
+
   return (
     <Router>
       <div className="p-4 max-w-sm mx-auto bg-white rounded-xl shadow-md">
@@ -91,7 +100,7 @@ const App = () => {
         <div>
           <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Set this device name</label>
           <div className="mt-2">
-            <input id="email" name="email" value={deviceName} onChange={(e) => setDeviceName(e.target.value)} required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input>
+            <input id="email" name="email" value={deviceName} onKeyDown={(e) => deviceNameKeyPress(e.key)} onChange={(e) => setDeviceName(e.target.value)} required className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input>
           </div>
         </div>
         <LinkToHistory />

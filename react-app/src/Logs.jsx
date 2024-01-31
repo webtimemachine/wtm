@@ -3,12 +3,9 @@ import fontawesome from '@fortawesome/fontawesome'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChrome, faFirefox, faEdge, faInternetExplorer, faSafari, faOpera } from '@fortawesome/free-brands-svg-icons'
 import moment from 'moment';
+import { API_URL } from "./Constants";
 
 fontawesome.library.add(faChrome, faFirefox, faEdge, faInternetExplorer, faSafari, faOpera);
-const SERVER_URL = () => {
-    return 'https://36ac-181-117-161-108.ngrok-free.app'
-    // return 'http://localhost:8000'
-}
 
 const PAGESIZE = 50;
 
@@ -17,12 +14,12 @@ export default function Logs(selectedDevice = undefined) {
 
     const [logs, setLogs] = useState([]);
     const [currentPage, ] = useState(0);
-    const [, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function fetchUrls() {
             setLoading(true);
-            const response = await fetch(SERVER_URL() + `/logs?offset=${currentPage * PAGESIZE}`, {
+            const response = await fetch(API_URL + `/logs?offset=${currentPage * PAGESIZE}&deviceName=${selectedDevice.selectedDevice}`, {
                 headers: new Headers({
                     "ngrok-skip-browser-warning": "69420",
                 }),
@@ -34,7 +31,7 @@ export default function Logs(selectedDevice = undefined) {
         }
 
         fetchUrls();
-    }, [currentPage]);
+    }, [currentPage, selectedDevice]);
 
     function deviceIcon(log) {
         let foundDevice = undefined;
@@ -110,6 +107,9 @@ export default function Logs(selectedDevice = undefined) {
     }, [selectedDevice, logs])
 
     return (
+        loading ? <div className="flex justify-center items-center h-32">
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900" />
+        </div> :
         <ul role="list" className="divide-y divide-gray-100">
             {filteredLogs.map((log) => (
                 <li key={log.id} className="relative flex justify-between gap-x-6 py-5">

@@ -27,12 +27,15 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "ENV=local react-scripts start",
     "build": "react-app-rewired build",
-    "build:dev": "DEV_MODE=true react-app-rewired build",
+    "build:local": "ENV=local DEV_MODE=true react-app-rewired build",
+    "build:dev": "ENV=development DEV_MODE=true react-app-rewired build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postbuild": "rm -rf '../client/Shared (Extension)/static/' && cp -r build/ '../client/Shared (Extension)/'",
+    "postbuild:local": "rm -rf '../client/Shared (Extension)/static/' && cp -r build/ '../client/Shared (Extension)/'",
+    "postbuild:dev": "rm -rf '../client/Shared (Extension)/static/' && cp -r build/ '../client/Shared (Extension)/'",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -41,6 +44,7 @@
       "react-app",
       "react-app/jest"
     ]
+
   },
   "browserslist": {
     "production": [

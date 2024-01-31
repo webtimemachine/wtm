@@ -14,16 +14,27 @@ async def get_devices(userId : int):
     try:
         devices = session.query(Log.deviceName).filter(Log.userId == userId).distinct().all()
         devices = [device[0] for device in devices]
+        try:
+            devices.remove(None)
+        except:
+            pass
+                    
         return {'devices': devices}
     except Exception as error:
         logging.error('Error while fetching devices:', exc_info=error)
         raise HTTPException(status_code=500, detail="An error occurred while fetching devices")
 @router.get("/logs")
-async def get_logs(limit: int = 50, offset: int = 0):
+async def get_logs(limit: int = 50, offset: int = 0, deviceName: Optional[str] = None, userId: int = 1):
     try:
-        logs = session.query(Log).order_by(desc(Log.id)).limit(limit).offset(offset).all()
-        count = session.query(Log).count()
-        return {'urls': logs, 'count': count}
+        logsQuery = session.query(Log)
+        countQuery = session.query(Log)
+        countQuery = countQuery.filter(Log.userId == userId)
+        if deviceName is not None and deviceName != 'All':
+            countQuery = countQuery.filter(Log.deviceName == deviceName)
+            logsQuery = logsQuery.filter(Log.deviceName == deviceName)
+        count = countQuery.count()
+        logsQuery = logsQuery.order_by(desc(Log.id)).filter(Log.userId == userId).limit(limit).offset(offset).all()
+        return {'urls': logsQuery, 'count': count}
     except Exception as error:
         logging.error('Error while fetching logs:', exc_info=error)
         raise HTTPException(status_code=500, detail="An error occurred while fetching logs")

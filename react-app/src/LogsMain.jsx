@@ -5,6 +5,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+import { DEFAULT_DEVICE_NAME, API_URL } from "./Constants";
+
 
 // const tabs = [
 //   { name: 'All', href: '#', current: true, device: 'All'},
@@ -18,10 +20,27 @@ function classNames(...classes) {
 
 
 export default function LogsMain() {
+
+  const [deviceName, setDeviceName] = useState(DEFAULT_DEVICE_NAME)
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    if (chrome.storage) {
+      // eslint-disable-next-line no-undef
+      chrome.storage.sync.get('deviceName').then(function (result) {
+          setDeviceName(result.deviceName || DEFAULT_DEVICE_NAME)
+      })
+    } else {
+      console.log('No chrome.storage, using locastorage')
+      const deviceName = localStorage.getItem('deviceName')
+      setDeviceName(deviceName || DEFAULT_DEVICE_NAME)
+    }
+  }, [])
+
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/devices?userId=1')
+    fetch(API_URL + '/devices?userId=1')
       .then(response => response.json())
       .then(data => {
         console.log(data);
@@ -40,6 +59,7 @@ export default function LogsMain() {
   return (
     <div className="border-b border-gray-200 pb-5 sm:pb-0 mt-2">
       <h3 className="text-base font-semibold leading-6 text-gray-900">History</h3>
+      <p className="mt-1 text-sm text-gray-500">This device name: {deviceName}</p>
       <div className="mt-3 sm:mt-4">
         <div className="sm:hidden">
           <label htmlFor="current-tab" className="sr-only">
@@ -49,7 +69,7 @@ export default function LogsMain() {
             id="current-tab"
             name="current-tab"
             className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            defaultValue={tabs.find((tab) => tab.current).name || "All"}
+            defaultValue={tabs.find((tab) => tab.current)?.name}
           >
             {tabs.map((tab) => (
               <option key={tab.name} onClick={() => { setSelectedDevice(tab.device); tabs.forEach((eachTab) => eachTab.current = tab.device === eachTab.device) }}
