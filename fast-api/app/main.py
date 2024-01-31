@@ -3,10 +3,10 @@ from fastapi import FastAPI, __version__
 from routes import router
 from fastapi.middleware.cors import CORSMiddleware
 import logging
+import requests
+import xml.etree.ElementTree as ET
 
 app = FastAPI()
-
-
 
 app.add_middleware(
     CORSMiddleware,
