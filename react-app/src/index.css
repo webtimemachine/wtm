@@ -36,13 +36,13 @@ html.desktop {
 }
 
 html.apple-device {
-  margin: 25px 25px;
+  padding: 25px 25px;
 }
 
 
 .icon-container {
-  width: 24px;  /* o el tamaño que prefieras */
-  height: 24px; /* asegúrate de que coincida con el ancho para mantener la proporción */
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;

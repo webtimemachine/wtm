@@ -82,10 +82,6 @@ export default function Logs(selectedDevice = undefined) {
                 break;
         }
         if (foundBrowser) {
-            // return <span className="material-symbols-outlined">
-            //     {foundBrowser}
-            // </span>
-
             return <FontAwesomeIcon className='h-6' icon={`fa-brands ${foundBrowser}`} />
         } else {
             return null
@@ -133,7 +129,7 @@ export default function Logs(selectedDevice = undefined) {
                         </div>
                     </div>
                     <div className="flex shrink-0 items-center gap-x-4">
-                        <div className="hidden sm:flex sm:flex-col sm:items-end">
+                        <div className="sm:flex sm:flex-col sm:items-end">
                             <p className="text-sm leading-6 text-gray-900">{log.role}</p>
                             {log.createdAt ? (
                                 <p className="mt-1 text-xs leading-5 text-gray-500">

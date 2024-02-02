@@ -17,7 +17,7 @@ import { DEFAULT_DEVICE_NAME, API_URL } from "./Constants";
 //   { name: 'Android', href: '#', current: false, device : 'Android'}
 // ]
 
-
+const userId = 1
 
 export default function LogsMain() {
 
@@ -28,7 +28,7 @@ export default function LogsMain() {
     if (chrome.storage) {
       // eslint-disable-next-line no-undef
       chrome.storage.sync.get('deviceName').then(function (result) {
-          setDeviceName(result.deviceName || DEFAULT_DEVICE_NAME)
+        setDeviceName(result.deviceName || DEFAULT_DEVICE_NAME)
       })
     } else {
       console.log('No chrome.storage, using locastorage')
@@ -40,10 +40,13 @@ export default function LogsMain() {
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
-    fetch(API_URL + '/devices?userId=1')
+    fetch(API_URL + `/devices?userId=${userId}`, {
+      headers: new Headers({
+        "ngrok-skip-browser-warning": "69420",
+      }),
+    })
       .then(response => response.json())
       .then(data => {
-        console.log(data);
         const newTabs = data.devices.map(device => ({
           name: device,
           href: '#',
@@ -70,9 +73,10 @@ export default function LogsMain() {
             name="current-tab"
             className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             defaultValue={tabs.find((tab) => tab.current)?.name}
+            onChange={(e) => { setSelectedDevice(e.target.value); tabs.forEach((eachTab) => eachTab.current = e.target.value === eachTab.device); console.log(e.target.value) }}
           >
             {tabs.map((tab) => (
-              <option key={tab.name} onClick={() => { setSelectedDevice(tab.device); tabs.forEach((eachTab) => eachTab.current = tab.device === eachTab.device) }}
+              <option key={tab.name}
               >{tab.name}</option>
             ))}
           </select>
