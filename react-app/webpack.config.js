@@ -1,10 +1,13 @@
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
+const webpack = require('webpack');
+
 
 module.exports = (env, argv) => {
-  console.log('env', env);
   const envPath = env.ENVIRONMENT ? `.env.${env.ENVIRONMENT}` : '.env';
-
+  
+  console.log('[WEBPACK]', env.ENVIRONMENT, envPath);
+  
   const config = {
     entry: './public/content.js',
     output: {
@@ -12,10 +15,15 @@ module.exports = (env, argv) => {
       path: path.resolve(__dirname, 'build'),
       publicPath: '/',
     },
-      plugins: [
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify(env.ENVIRONMENT),
+        },
+      }),
         new Dotenv({
               safe: false,
-              path: envPath
+              path: "./" + envPath
           })
       ]
   };
