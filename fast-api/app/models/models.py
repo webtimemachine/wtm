@@ -1,5 +1,5 @@
 # app/models.py
-from sqlalchemy import create_engine, Column, Integer, String, func, DateTime, ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, func, DateTime, ForeignKey, UUID
 from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
 
@@ -42,25 +42,9 @@ class Log(Base):
     osName = Column(String)
     osVersion = Column(String)
     deviceName = Column(String)
-    userId = Column(Integer, ForeignKey('users.id'))
+    userId = Column(UUID)
     createdAt = Column(DateTime, default=func.current_timestamp())
     updatedAt = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
     
-class User(Base):
-    __tablename__ = "users"
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'email': self.email,
-            'createdAt': self.createdAt,
-            'updatedAt': self.updatedAt
-        }
-        
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    email = Column(String)
-    createdAt = Column(DateTime, default=func.current_timestamp())
-    updatedAt = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
     
 Base.metadata.create_all(engine)

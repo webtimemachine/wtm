@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Logs from "./Logs"
 import React, { useEffect, useState } from 'react';
 
@@ -5,7 +6,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-import { DEFAULT_DEVICE_NAME, API_URL } from "./Constants";
+import { DEFAULT_DEVICE_NAME, API_URL, getFromStorage, setInStorage } from "./Constants";
+import { supabase } from "./supabaseClient";
 
 
 // const tabs = [
@@ -24,45 +26,56 @@ export default function LogsMain() {
   const [deviceName, setDeviceName] = useState(DEFAULT_DEVICE_NAME)
 
   useEffect(() => {
-    // eslint-disable-next-line no-undef
-    if (chrome.storage) {
-      // eslint-disable-next-line no-undef
-      chrome.storage.sync.get('deviceName').then(function (result) {
-        setDeviceName(result.deviceName || DEFAULT_DEVICE_NAME)
-      })
-    } else {
-      console.log('No chrome.storage, using locastorage')
-      const deviceName = localStorage.getItem('deviceName')
-      setDeviceName(deviceName || DEFAULT_DEVICE_NAME)
-    }
+    getFromStorage("deviceName").then((result) => {
+      setDeviceName(result || DEFAULT_DEVICE_NAME)
+    })
+
   }, [])
 
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
-    fetch(API_URL + `/devices?userId=${userId}`, {
-      headers: new Headers({
-        "ngrok-skip-browser-warning": "69420",
-      }),
-    })
-      .then(response => response.json())
-      .then(data => {
-        const newTabs = data.devices.map(device => ({
-          name: device,
-          href: '#',
-          current: false,
-          device: device
-        }));
-        newTabs.unshift({ name: 'All', href: '#', current: true, device: 'All' });
-        setTabs(newTabs);
-      });
+    async function fetchUrls() {
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (session != null && error == null) {
+        fetch(API_URL + `/devices?userId=${userId}`, {
+          headers: new Headers({
+            "ngrok-skip-browser-warning": "69420",
+            "Authorization": session.access_token,
+            "refresh-token": session.refresh_token,
+          }),
+        })
+          .then(response => response.json())
+          .then(data => {
+            const newTabs = data.devices.map(device => ({
+              name: device,
+              href: '#',
+              current: false,
+              device: device
+            }));
+            newTabs.unshift({ name: 'All', href: '#', current: true, device: 'All' });
+            setTabs(newTabs);
+          });
+      } else {
+        console.error("[LOGSMAIN] error getting session", error, session);
+      }
+    }
+    fetchUrls();
   }, []);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setInStorage('deviceName', deviceName)
+    }, 1000) //this is because chrome.storage.sync.set has a limit
+
+    return () => clearTimeout(timerId) // clear the timeout just in case
+  }, [deviceName])
 
   const [selectedDevice, setSelectedDevice] = useState("All");
   return (
     <div className="border-b border-gray-200 pb-5 sm:pb-0 mt-2">
       <h3 className="text-base font-semibold leading-6 text-gray-900">History</h3>
-      <p className="mt-1 text-sm text-gray-500">This device name: {deviceName}</p>
+      <p className="mt-1 text-sm text-gray-500">This device name: <input id="email" name="email" value={deviceName} onChange={(e) => setDeviceName(e.target.value)} required className="inline rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input></p>
       <div className="mt-3 sm:mt-4">
         <div className="sm:hidden">
           <label htmlFor="current-tab" className="sr-only">
@@ -105,4 +118,5 @@ export default function LogsMain() {
       <Logs selectedDevice={selectedDevice} />
     </div>
   )
+
 }

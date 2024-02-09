@@ -1,12 +1,13 @@
 from time import time
 from fastapi import FastAPI, __version__
-from routes import router
+from routes.routes import router
+from services.supabase import supabaseRouter
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import logging
-import requests
-import xml.etree.ElementTree as ET
 
 app = FastAPI()
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,7 +23,11 @@ logging.basicConfig(filename='info.log', level=logging.INFO, format='%(asctime)s
 
 logging.info('Starting app', __version__)
 
+app.include_router(supabaseRouter)
 app.include_router(router)
+
+# Mounting static file static/login.html
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get('/ping')
 async def hello():
