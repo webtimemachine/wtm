@@ -5,7 +5,6 @@ import {
 } from 'react-chrome-extension-router'
 
 import Login from './Login'
-import Account from './Account'
 import { supabase } from './supabaseClient'
 import LogsMain from './LogsMain'
 

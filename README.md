@@ -9,6 +9,7 @@ Use the following commands to run the server in your local enviroment:
 
 ```bash
 cd fast-api/
+export NGROK_AUTHTOKEN=2L3Ov... # Your ngrok token
 docker compose up
 ```
 
