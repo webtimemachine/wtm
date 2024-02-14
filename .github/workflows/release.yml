@@ -1,12 +1,27 @@
+name: Release
+
 on:
-    push:
-      tags:
-        - 'v*'
-- name: Download CRX file
+    pull_request:
+        types: [closed]
+        branches: 
+            - false-main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./react-app
+
+    steps:
+      - name: Create temp folder
+        run: mkdir -p /home/runner/work/wtm/wtm/crx-files
+
+      - name: Download CRX file
         uses: actions/download-artifact@v2
         with:
           name: extension
           path: /home/runner/work/wtm/wtm/crx-files
+
 
       - name: Extract Tag Name
         id: get_tag_name
