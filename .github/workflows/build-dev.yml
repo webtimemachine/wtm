@@ -1,0 +1,45 @@
+name: Build CRX
+
+on:
+  push:
+    branches:
+        staging
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./react-app
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+          
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Install crx
+        run: |
+          npm install -g crx          
+
+      - name: Generate CRX file
+        run: |  
+          pwd     
+          cd build
+          crx pack
+     
+      - name: Upload CRX file
+        uses: actions/upload-artifact@v2
+        with:
+          name: extension
+          path: /home/runner/work/wtm/wtm/react-app/build/build.crx
