@@ -41,5 +41,5 @@ jobs:
       - name: Upload CRX file
         uses: actions/upload-artifact@v2
         with:
-          name: CRX.zip
+          name: CRX
           path: /home/runner/work/wtm/wtm/react-app/build/build.crx
