@@ -40,3 +40,7 @@ xcode-client/Shared (Extension)/static/js/*
 react-app/.env.development
 react-app/.env.production
 react-app/.env
+
+# Ignore Mac DS_Store files
+.DS_Store
+**/.DS_Store
