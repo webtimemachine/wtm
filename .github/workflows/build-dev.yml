@@ -39,7 +39,7 @@ jobs:
           crx pack
      
       - name: Upload CRX file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: CRX
           path: /home/runner/work/wtm/wtm/react-app/build/build.crx
