@@ -48,7 +48,6 @@ jobs:
         
             mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
             cp app.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-            cp extension.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
         env:
           ENCODED_CERTIFICATE: ${{ secrets.ENCODED_CERTIFICATE }}
           ENCODED_PROVISIONING_PROFILE_APP: ${{ secrets.ENCODED_PROVISIONING_PROFILE_APP }}
