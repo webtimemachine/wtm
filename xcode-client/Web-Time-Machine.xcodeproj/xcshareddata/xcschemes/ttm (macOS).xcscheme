@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "84961A8B2B51C39C000471F8"
+               BlueprintIdentifier = "84961A9D2B51C39C000471F8"
                BuildableName = "WebTimeMachine.app"
-               BlueprintName = "ttm (iOS)"
+               BlueprintName = "ttm (macOS)"
                ReferencedContainer = "container:Web-Time-Machine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,9 +43,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84961A8B2B51C39C000471F8"
+            BlueprintIdentifier = "84961A9D2B51C39C000471F8"
             BuildableName = "WebTimeMachine.app"
-            BlueprintName = "ttm (iOS)"
+            BlueprintName = "ttm (macOS)"
             ReferencedContainer = "container:Web-Time-Machine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -60,9 +60,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84961A8B2B51C39C000471F8"
+            BlueprintIdentifier = "84961A9D2B51C39C000471F8"
             BuildableName = "WebTimeMachine.app"
-            BlueprintName = "ttm (iOS)"
+            BlueprintName = "ttm (macOS)"
             ReferencedContainer = "container:Web-Time-Machine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
