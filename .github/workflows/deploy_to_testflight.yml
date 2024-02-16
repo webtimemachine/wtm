@@ -1,16 +1,25 @@
-name: Deploy to TestFlight
+name: iOS Build and Deploy Workflow
 
 on:
   push:
     branches:
+      - main
       - 'feat/fastlane-flow'
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches: 
+      - main
+      - 'feature/chrome-history-extension'
 
 jobs:
-  build:
-    name: Build and Deploy
+  build-and-deploy:
+    name: Build and Deploy iOS Safari Extension
     runs-on: macos-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -23,6 +32,21 @@ jobs:
           bundle install
         working-directory: ./xcode-client
 
+      - name: Decode and Install Apple Provisioning Profiles and Certificate
+        run: |
+          # Tu script para decodificar e instalar certificados y perfiles de provisionamiento
+        env:
+          ENCODED_CERTIFICATE: ${{ secrets.ENCODED_CERTIFICATE }}
+          ENCODED_PROVISIONING_PROFILE_APP: ${{ secrets.ENCODED_PROVISIONING_PROFILE_APP }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+
+      - name: Execute Fastlane Match
+        run: |
+          fastlane match appstore --readonly --app_identifier "com.ttm246.app" --git_url "https://github.com/webtimemachine/wtm-cert.git"
+        env:
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        working-directory: ./xcode-client
 
       - name: Build and Upload to TestFlight
         env:
@@ -34,10 +58,11 @@ jobs:
 
       - name: Upload IPA to GitHub Releases
         uses: actions/upload-release-asset@v1
+        if: startsWith(github.ref, 'refs/tags/')
         env:
-          GITHUB_TOKEN: ${{ secrets.TTM_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./WebTimeMachine.ipa
+          asset_path: ./xcode-client/build/WebTimeMachine.ipa
           asset_name: WebTimeMachine.ipa
           asset_content_type: application/octet-stream
