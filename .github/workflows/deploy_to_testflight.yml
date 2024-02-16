@@ -26,11 +26,17 @@ jobs:
         with:
           ruby-version: '3.0'
 
-      - name: Install Dependencies
+      - name: Install Ruby Dependencies
         run: |
           gem install bundler
           bundle install
         working-directory: ./xcode-client
+      
+      - name: Install Node.js Dependencies and Build React Native App
+        run: |
+          npm install
+          npm run build
+        working-directory: ./react-app
 
       - name: Decode and Install Apple Provisioning Profiles and Certificate
         run: |
