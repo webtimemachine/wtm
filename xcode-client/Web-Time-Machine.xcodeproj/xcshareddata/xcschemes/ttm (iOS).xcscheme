@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "84961A8B2B51C39C000471F8"
-               BuildableName = "WebTimeMachine.app"
+               BuildableName = "ProductName.app"
                BlueprintName = "ttm (iOS)"
                ReferencedContainer = "container:Web-Time-Machine.xcodeproj">
             </BuildableReference>
@@ -30,7 +30,7 @@
       shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84961A8B2B51C39C000471F8"
-            BuildableName = "WebTimeMachine.app"
+            BuildableName = "ProductName.app"
             BlueprintName = "ttm (iOS)"
             ReferencedContainer = "container:Web-Time-Machine.xcodeproj">
          </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84961A8B2B51C39C000471F8"
-            BuildableName = "WebTimeMachine.app"
+            BuildableName = "ProductName.app"
             BlueprintName = "ttm (iOS)"
             ReferencedContainer = "container:Web-Time-Machine.xcodeproj">
          </BuildableReference>

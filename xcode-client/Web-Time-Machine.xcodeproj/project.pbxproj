@@ -19,6 +19,8 @@
 		84961A982B51C39C000471F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84961A962B51C39C000471F8 /* Main.storyboard */; };
 		84961AA12B51C39C000471F8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84961AA02B51C39C000471F8 /* AppDelegate.swift */; };
 		84961AA42B51C39C000471F8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84961AA22B51C39C000471F8 /* Main.storyboard */; };
+		84961AAC2B51C39C000471F8 /* proyectos Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84961AAB2B51C39C000471F8 /* proyectos Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		84961AB62B51C39C000471F8 /* proyectos Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84961AB52B51C39C000471F8 /* proyectos Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		84961ABC2B51C39C000471F8 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 84961A7F2B51C39B000471F8 /* Main.html */; };
 		84961ABD2B51C39C000471F8 /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 84961A7F2B51C39B000471F8 /* Main.html */; };
 		84961AC02B51C39C000471F8 /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 84961A822B51C39B000471F8 /* Style.css */; };
@@ -36,6 +38,8 @@
 		849CB1E82B605C4E00DAA4FD /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 849CB1E52B605C4E00DAA4FD /* assets */; };
 		84A06B4C2B51C3C10001C3BF /* images in Resources */ = {isa = PBXBuildFile; fileRef = 84A06B452B51C3C10001C3BF /* images */; };
 		84A06B512B51C3C10001C3BF /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 84A06B4A2B51C3C10001C3BF /* content.js */; };
+		84A06B522B51C3C10001C3BF /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 84A06B4B2B51C3C10001C3BF /* manifest.json */; };
+		84A06B622B51C6900001C3BF /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 84A06B4B2B51C3C10001C3BF /* manifest.json */; };
 		84A06B632B51C73F0001C3BF /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 84A06B4A2B51C3C10001C3BF /* content.js */; };
 		84A06B642B51C7420001C3BF /* images in Resources */ = {isa = PBXBuildFile; fileRef = 84A06B452B51C3C10001C3BF /* images */; };
 		84A06B692B51CA980001C3BF /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 84A06B4A2B51C3C10001C3BF /* content.js */; };
@@ -76,6 +80,48 @@
 		84B688FD2B7451FB00CD9133 /* content.bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 84B688F72B7451FB00CD9133 /* content.bundle.js */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		84961AAD2B51C39C000471F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84961A792B51C39B000471F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84961AAA2B51C39C000471F8;
+			remoteInfo = "proyectos Extension (iOS)";
+		};
+		84961AB72B51C39C000471F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84961A792B51C39B000471F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84961AB42B51C39C000471F8;
+			remoteInfo = "proyectos Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		84961ACF2B51C39C000471F8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				84961AAC2B51C39C000471F8 /* proyectos Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84961AD62B51C39C000471F8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				84961AB62B51C39C000471F8 /* proyectos Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8467C6652B5599DA00B682F9 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
 		8467C6692B55B4FA00B682F9 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
@@ -85,13 +131,13 @@
 		84961A842B51C39B000471F8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84961A852B51C39C000471F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84961A872B51C39C000471F8 /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
-		84961A8C2B51C39C000471F8 /* WebTimeMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebTimeMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84961A8C2B51C39C000471F8 /* ProductName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84961A8F2B51C39C000471F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84961A912B51C39C000471F8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		84961A942B51C39C000471F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84961A972B51C39C000471F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84961A992B51C39C000471F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84961A9E2B51C39C000471F8 /* WebTimeMachine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebTimeMachine.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84961A9E2B51C39C000471F8 /* ProductName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84961AA02B51C39C000471F8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84961AA32B51C39C000471F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84961AA52B51C39C000471F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -196,8 +242,8 @@
 		84961A8D2B51C39C000471F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				84961A8C2B51C39C000471F8 /* WebTimeMachine.app */,
-				84961A9E2B51C39C000471F8 /* WebTimeMachine.app */,
+				84961A8C2B51C39C000471F8 /* ProductName.app */,
+				84961A9E2B51C39C000471F8 /* ProductName.app */,
 				84961AAB2B51C39C000471F8 /* proyectos Extension.appex */,
 				84961AB52B51C39C000471F8 /* proyectos Extension.appex */,
 			);
@@ -278,14 +324,16 @@
 				84961A882B51C39C000471F8 /* Sources */,
 				84961A892B51C39C000471F8 /* Frameworks */,
 				84961A8A2B51C39C000471F8 /* Resources */,
+				84961ACF2B51C39C000471F8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				84961AAE2B51C39C000471F8 /* PBXTargetDependency */,
 			);
 			name = "ttm (iOS)";
 			productName = "proyectos (iOS)";
-			productReference = 84961A8C2B51C39C000471F8 /* WebTimeMachine.app */;
+			productReference = 84961A8C2B51C39C000471F8 /* ProductName.app */;
 			productType = "com.apple.product-type.application";
 		};
 		84961A9D2B51C39C000471F8 /* ttm (macOS) */ = {
@@ -295,14 +343,16 @@
 				84961A9A2B51C39C000471F8 /* Sources */,
 				84961A9B2B51C39C000471F8 /* Frameworks */,
 				84961A9C2B51C39C000471F8 /* Resources */,
+				84961AD62B51C39C000471F8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				84961AB82B51C39C000471F8 /* PBXTargetDependency */,
 			);
 			name = "ttm (macOS)";
 			productName = "proyectos (macOS)";
-			productReference = 84961A9E2B51C39C000471F8 /* WebTimeMachine.app */;
+			productReference = 84961A9E2B51C39C000471F8 /* ProductName.app */;
 			productType = "com.apple.product-type.application";
 		};
 		84961AAA2B51C39C000471F8 /* ttm Extension (iOS) */ = {
@@ -400,6 +450,7 @@
 				84B628582B640A7500A7DB27 /* index.html in Resources */,
 				8467C6662B5599DA00B682F9 /* background.js in Resources */,
 				849CB1E62B605C4E00DAA4FD /* assets in Resources */,
+				84A06B522B51C3C10001C3BF /* manifest.json in Resources */,
 				84A06B4C2B51C3C10001C3BF /* images in Resources */,
 				84961AC62B51C39C000471F8 /* Assets.xcassets in Resources */,
 				84B688FB2B7451FB00CD9133 /* content.bundle.js in Resources */,
@@ -445,6 +496,7 @@
 				84B6286D2B640A8300A7DB27 /* static in Resources */,
 				84A06B632B51C73F0001C3BF /* content.js in Resources */,
 				84B628492B640A1400A7DB27 /* _locales in Resources */,
+				84A06B622B51C6900001C3BF /* manifest.json in Resources */,
 				84B628692B640A7D00A7DB27 /* logo512.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,6 +564,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84961AAE2B51C39C000471F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84961AAA2B51C39C000471F8 /* ttm Extension (iOS) */;
+			targetProxy = 84961AAD2B51C39C000471F8 /* PBXContainerItemProxy */;
+		};
+		84961AB82B51C39C000471F8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84961AB42B51C39C000471F8 /* ttm Extension (macOS) */;
+			targetProxy = 84961AB72B51C39C000471F8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		84961A7F2B51C39B000471F8 /* Main.html */ = {
@@ -605,7 +670,6 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = WebTimeMachine;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -660,7 +724,6 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = WebTimeMachine;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -668,10 +731,9 @@
 		84961ACD2B51C39C000471F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2858MX5336;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DS5LA6CM8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "proyectos Extension";
@@ -687,7 +749,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.app.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.poc.Extension;
 				PRODUCT_NAME = "proyectos Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -700,10 +762,9 @@
 		84961ACE2B51C39C000471F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2858MX5336;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DS5LA6CM8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (Extension)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "proyectos Extension";
@@ -719,7 +780,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.app.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.poc.Extension;
 				PRODUCT_NAME = "proyectos Extension";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -733,18 +794,18 @@
 		84961AD12B51C39C000471F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2858MX5336;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DS5LA6CM8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Web Time Machine";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -760,8 +821,8 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.app;
-				PRODUCT_NAME = WebTimeMachine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.poc;
+				PRODUCT_NAME = ProductName;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -772,18 +833,18 @@
 		84961AD22B51C39C000471F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2858MX5336;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4DS5LA6CM8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "iOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Web Time Machine";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -799,8 +860,8 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.app;
-				PRODUCT_NAME = WebTimeMachine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.poc;
+				PRODUCT_NAME = ProductName;
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -813,10 +874,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/proyectos.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2858MX5336;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
@@ -833,7 +892,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.app.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.poc.Extension;
 				PRODUCT_NAME = "proyectos Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -846,10 +905,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "macOS (Extension)/proyectos.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2858MX5336;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (Extension)/Info.plist";
@@ -866,7 +923,7 @@
 					"-framework",
 					SafariServices,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.app.Extension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.poc.Extension;
 				PRODUCT_NAME = "proyectos Extension";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -878,21 +935,18 @@
 		84961AD82B51C39C000471F8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/proyectos.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2858MX5336;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Web Time Machine";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
-				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -905,8 +959,8 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.app;
-				PRODUCT_NAME = WebTimeMachine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.poc;
+				PRODUCT_NAME = ProductName;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -916,21 +970,18 @@
 		84961AD92B51C39C000471F8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "macOS (App)/proyectos.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
-				DEVELOPMENT_TEAM = 2858MX5336;
+				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "macOS (App)/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Web Time Machine";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
-				INFOPLIST_KEY_UILaunchStoryboardName = Main.storyboard;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -943,8 +994,8 @@
 					"-framework",
 					WebKit,
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.app;
-				PRODUCT_NAME = WebTimeMachine;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttm246.poc;
+				PRODUCT_NAME = ProductName;
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
