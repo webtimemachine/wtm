@@ -16,14 +16,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
-      
-      - name: List files
-        run: ls -la
 
       - name: Install Dependencies
         run: |
           gem install bundler
           bundle install
+        working-directory: ./xcode-client
+
 
       - name: Build and Upload to TestFlight
         env:
@@ -31,6 +30,7 @@ jobs:
         run: |
           echo "$APP_STORE_CONNECT_API_KEY" > api_key.json
           fastlane beta
+        working-directory: ./xcode-client
 
       - name: Upload IPA to GitHub Releases
         uses: actions/upload-release-asset@v1
