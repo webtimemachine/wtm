@@ -43,10 +43,9 @@ jobs:
 
       - name: Execute Fastlane Match
         run: |
-            fastlane match appstore --readonly --app_identifier "com.ttm246.app" --git_url "https://GH_TOKEN:x-oauth-basic@github.com/webtimemachine/wtm-cert.git"
+            fastlane match appstore --readonly --app_identifier "com.ttm246.app" --git_url "https://${{ secrets.GH_TOKEN }}:x-oauth-basic@github.com/webtimemachine/wtm-cert.git"
         env:
             MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-            GH_TOKEN: ${{ secrets.GH_TOKEN }}
         working-directory: ./xcode-client
 
       - name: Build and Upload to TestFlight
