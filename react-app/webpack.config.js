@@ -7,7 +7,12 @@ module.exports = (env, argv) => {
   
   console.log('[WEBPACK]', env.ENVIRONMENT, envPath);
 
-  dotenv.config({ path: envPath }); 
+  // Load .env file if it exists, otherwise load from process.env
+  if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+  } else {
+    dotenv.config();
+  }
   
   const config = {
     entry: './public/content.js',
