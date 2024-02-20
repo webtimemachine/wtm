@@ -39,6 +39,7 @@ jobs:
           secrets: ${{ toJSON(secrets) }}
           secrets_env: all
           overwrite_prod: false
+          file_name_prod: "./react-app/.env"
           
       
       - name: Install Node.js Dependencies and Build React Native App
