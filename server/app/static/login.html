@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign In with Supabase</title>
+  </head>
+  <body>
+    <h1>Sign In with Supabase</h1>
+    <p>Please wait, you will be redirected</p>
+    <!-- <script src="supabase-js@2.js"></script> -->
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+      const supabaseUrl = "https://esubikthsokrkvfdyvxb.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzdWJpa3Roc29rcmt2ZmR5dnhiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDY4ODUwOTQsImV4cCI6MjAyMjQ2MTA5NH0.pCIMMZxPSRldBwrHpRSrBy2Doi7SKnC0u93FW-OseMM";
+
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      supabase.auth.signInWithOAuth({provider:"github"})
+    </script>
+  </body>
+</html>
