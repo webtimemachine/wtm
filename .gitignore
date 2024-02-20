@@ -41,3 +41,4 @@ react-app/.env.development
 react-app/.env.production
 react-app/.env
 xcode-client/Shared (Extension)/node_modules_supabase_realtime-js_node_modules_ws_browser_js.content.bundle.js
+.DS_Store
