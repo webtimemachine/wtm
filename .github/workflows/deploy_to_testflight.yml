@@ -31,6 +31,15 @@ jobs:
           gem install bundler
           bundle install
         working-directory: ./xcode-client
+
+      - name: Secrets to env
+        uses: shine1594/secrets-to-env-action@v1.6.1
+        with:
+          # json string of github repository secrets
+          secrets: ${{ toJSON(secrets) }}
+          secrets_env: all
+          overwrite_prod: false
+          
       
       - name: Install Node.js Dependencies and Build React Native App
         run: |
