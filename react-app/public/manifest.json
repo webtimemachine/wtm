@@ -23,8 +23,5 @@
       "matches": ["<all_urls>"],
       "js": ["content.bundle.js"]
     }
-  ],
-  "externally_connectable": {
-    "matches": ["https://*.ngrok-free.app/"]
-  }
+  ]
 }

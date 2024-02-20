@@ -15,8 +15,6 @@
 
       const supabase = createClient(supabaseUrl, supabaseKey);
 
-      console.log(supabase);
-
       supabase.auth.signInWithOAuth({provider:"github"})
     </script>
   </body>
