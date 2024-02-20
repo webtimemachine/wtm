@@ -1,6 +1,7 @@
 const path = require('path');
 const dotenv = require('dotenv')
 const webpack = require('webpack');
+const fs = require('fs');
 
 module.exports = (env, argv) => {
   const envPath = env.ENVIRONMENT ? `.env.${env.ENVIRONMENT}` : '.env';
