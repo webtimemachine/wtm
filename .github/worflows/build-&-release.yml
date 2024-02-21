@@ -1,0 +1,76 @@
+name: Build and Release Extension crx
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./react-app
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install dependencies
+        run: npm install
+          
+      - name: Build
+        run: |
+          npm run build
+
+      - name: Install crx
+        run: |
+          npm install -g crx          
+
+      - name: Generate CRX file
+        run: |  
+          pwd     
+          cd build
+          crx pack
+     
+      - name: Upload CRX file
+        uses: actions/upload-artifact@v2
+        with:
+          name: extension
+          path: /home/runner/work/wtm/wtm/react-app/build/build.crx
+
+      - name: Download CRX file
+        uses: actions/download-artifact@v2
+        with:
+          name: extension
+          path: /home/runner/work/wtm/wtm/crx-files
+
+      - name: Extract Tag Name
+        id: get_tag_name
+        run: echo "::set-output name=TAG_NAME::$(echo ${GITHUB_REF#refs/tags/})"
+  
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get_tag_name.outputs.TAG_NAME }}
+          release_name: WTM ${{ steps.get_tag_name.outputs.TAG_NAME }}
+          draft: false
+          prerelease: false
+  
+      - name: Upload .crx to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: "/home/runner/work/wtm/wtm/crx-files/build.crx"
+          asset_name: build.crx
+          asset_content_type: application/crx

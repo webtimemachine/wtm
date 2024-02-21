@@ -1,13 +1,17 @@
+from os import getenv
 from time import time
-from fastapi import FastAPI, __version__
+from fastapi import FastAPI, __version__, Request
 from routes.routes import router
 from services.supabase import supabaseRouter
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
+# from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+
 import logging
 
 app = FastAPI()
 
+templates = Jinja2Templates(directory="templates")
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,8 +30,12 @@ logging.info('Starting app', __version__)
 app.include_router(supabaseRouter)
 app.include_router(router)
 
-# Mounting static file static/login.html
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Mounting static folder
+# app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get('/login')
+async def login(request: Request, provider = "github"):
+    return templates.TemplateResponse("login.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_KEY", "")})
 
 @app.get('/ping')
 async def hello():

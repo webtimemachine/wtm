@@ -30,14 +30,14 @@
   },
   "scripts": {
     "start": "ENV=local react-scripts start",
-    "build": "react-scripts build",
-    "build:local": "react-scripts build --local",
-    "build:dev": "ENV=development react-scripts build",
+    "build": "sh -ac '. ./.env${REACT_APP_ENV}; react-scripts build'",
+    "build:local": "REACT_APP_ENV=.local npm run build",
+    "build:dev": "REACT_APP_ENV=.development npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postbuild": "rm -rf '../xcode-client/Shared (Extension)/static/' && cp -r build/ '../xcode-client/Shared (Extension)/'",
-    "postbuild:local": "rm -rf '../xcode-client/Shared (Extension)/static/' && cp -r build/ '../xcode-client/Shared (Extension)/'",
-    "postbuild:dev": "rm -rf '../xcode-client/Shared (Extension)/static/' && cp -r build/ '../xcode-client/Shared (Extension)/'",
+    "postbuild": "rm -rf '../xcode-client/Shared (Extension)/static/' && webpack --config webpack.config.js --stats-error-details && cp -r build/ '../xcode-client/Shared (Extension)/'",
+    "postbuild:local": "rm -rf '../xcode-client/Shared (Extension)/static/' && webpack --config webpack.config.js --env ENVIRONMENT=local --stats-error-details && cp -r build/ '../xcode-client/Shared (Extension)/'",
+    "postbuild:dev": "rm -rf '../xcode-client/Shared (Extension)/static/' && webpack --config webpack.config.js --env ENVIRONMENT=development --stats-error-details && cp -r build/ '../xcode-client/Shared (Extension)/'",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -60,6 +60,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.1",
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.56.0",

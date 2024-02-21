@@ -28,7 +28,7 @@ services:
     image: ngrok/ngrok:alpine
     ports:
       - "4040:4040"
-    command: http app:8000
+    command: http app:8000 --domain ${NGROK_DOMAIN}
     environment:
       NGROK_AUTHTOKEN: ${NGROK_AUTHTOKEN}
     depends_on:
