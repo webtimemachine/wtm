@@ -26,6 +26,7 @@ platform :ios do
     )
     build_app(
       scheme: "ttm (iOS)",
+      output_directory: "./build/",
       export_options: {
         provisioningProfiles: {
           "com.ttm246.app": "match AppStore com.ttm246.app 1708013014"
