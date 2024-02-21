@@ -83,10 +83,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const core = require('@actions/core');
-            const github = require('@actions/github');
-            const context = github.context;
-      
             // Extract the tag from context.ref by removing the 'refs/tags/' prefix
             const tag = context.ref.replace('refs/tags/', '');
             console.log(`Searching for the release associated with tag: ${tag}`);
@@ -109,7 +105,6 @@ jobs:
               // Handle errors in getting the release by tag, such as if the release does not exist
               core.setFailed(`Error fetching the release by tag: ${error.message}`);
             }
-      
 
       - name: Upload IPA to GitHub Releases
         uses: actions/upload-release-asset@v1
