@@ -10,7 +10,6 @@ on:
   pull_request:
     branches: 
       - main
-      - 'feature/chrome-history-extension'
 
 jobs:
   build-and-deploy:
