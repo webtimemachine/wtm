@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - 'fix/fastfile'
     tags:
       - 'v*.*.*'
   pull_request:
