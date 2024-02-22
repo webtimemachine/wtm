@@ -18,8 +18,8 @@ if dburi and dburi.startswith("postgres://"):
     dburi = dburi.replace("postgres://", "postgresql://", 1)
     
 # This is to clean the dburi of any query parameters 
-dburi = re.sub(r"[?&]supa=[^&]*", "", dburi
-dburi = re.sub(r"\?$", "", dburi))
+dburi = re.sub(r"[?&]supa=[^&]*", "", dburi)
+dburi = re.sub(r"\?$", "", dburi)
 
 engine = create_engine(dburi)
 Session = sessionmaker(bind=engine)
