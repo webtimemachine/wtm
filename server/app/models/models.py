@@ -11,9 +11,9 @@ except Exception as e:
     logging.error(f"Error loading .env file: {e}", exc_info=e)
 
 dburi = getenv('POSTGRES_URL')
-# if dburi and dburi.startswith("postgres://"):
+if dburi and dburi.startswith("postgres://"):
     # This is necessary for the app to work on Vercel
-    # dburi = dburi.replace("postgres://", "postgresql://", 1)
+    dburi = dburi.replace("postgres://", "postgresql://", 1)
 
 engine = create_engine(dburi)
 Session = sessionmaker(bind=engine)
