@@ -2,9 +2,13 @@
 from sqlalchemy import create_engine, Column, Integer, String, func, DateTime, ForeignKey, UUID
 from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
-
-load_dotenv("../.env")
 from os import getenv
+import logging
+
+try:
+    load_dotenv("../.env")
+except Exception as e:
+    logging.error(f"Error loading .env file: {e}", exc_info=e)
 
 dburi = getenv('POSTGRES_URL')
 if dburi and dburi.startswith("postgres://"):
@@ -47,4 +51,7 @@ class Log(Base):
     updatedAt = Column(DateTime, default=func.current_timestamp(), onupdate=func.current_timestamp())
     
     
-Base.metadata.create_all(engine)
+try:
+    Base.metadata.create_all(engine)
+except Exception as e:
+    logging.error(f"Error creating tables: {e}", exc_info=e)

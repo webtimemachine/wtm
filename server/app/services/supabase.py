@@ -7,7 +7,7 @@ from fastapi import APIRouter
 load_dotenv(".env")
 
 url = getenv("SUPABASE_URL", "")
-key = getenv("SUPABASE_SERVICE_KEY", "")
+key = getenv("SUPABASE_SERVICE_ROLE_KEY", "")
 
 supabase: Client = create_client(url, key)
 

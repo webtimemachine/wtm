@@ -10,8 +10,8 @@ Supabase is used for authentication and it will be used as a replacement for Pos
 
 ```bash
 SUPABASE_URL=<project-url>
-SUPABASE_KEY=<project-public-key>
-SUPABASE_SERVICE_KEY=<project-secret-service-key>
+SUPABASE_ANON_KEY=<project-public-key>
+SUPABASE_SERVICE_ROLE_KEY=<project-secret-service-key>
 ```
 
 4. Finally, go back to the project `Home` page, and then navitage to `Authentication > Providers`. While in there, enable `Github`. Save the `Callback URL` since you'll need it to setup the Gibhub Application in the next section. Also, you'll need to come back later to setup the `Client ID` and `Client Secret` with the values provided by the Github Application.

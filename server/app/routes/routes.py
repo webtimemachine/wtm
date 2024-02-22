@@ -12,7 +12,6 @@ router = APIRouter()
 
 @router.get("/devices")
 async def get_devices(request: Request):
-    print(request.headers.get('Refresh-Token'))
     try:
         supabaseSession = supabase.auth.set_session(request.headers.get('Authorization'), request.headers.get('Refresh-Token'))
         userId = supabaseSession.user.id
@@ -33,7 +32,6 @@ async def get_devices(request: Request):
 
 @router.get("/logs")
 async def get_logs(request: Request,limit: int = 50, offset: int = 0, deviceName: Optional[str] = None):
-    print(request.headers.get('Refresh-Token'))
     try:
         supabaseSession = supabase.auth.set_session(request.headers.get('Authorization'), request.headers.get('Refresh-Token'))
         userId = supabaseSession.user.id

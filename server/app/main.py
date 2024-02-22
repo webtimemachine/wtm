@@ -38,12 +38,12 @@ app.include_router(router)
 
 @app.get('/login')
 async def login(request: Request, provider = "github"):
-    return templates.TemplateResponse("login.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_KEY", "")})
+    return templates.TemplateResponse("login.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_ANON_KEY", "")})
 
 @app.get('/')
 @app.get('/login-success')
 async def login(request: Request, provider = "github"):
-    return templates.TemplateResponse("login-success.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_KEY", "")})
+    return templates.TemplateResponse("login-success.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_ANON_KEY", "")})
 
 @app.get('/health')
 async def health():
@@ -63,4 +63,4 @@ async def health():
 @app.get('/setup')
 async def setup():
     logging.debug('setup')
-    return {'version': API_VERSION, "supabaseUrl": getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_KEY", "")}
+    return {'version': API_VERSION, "supabaseUrl": getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_ANON_KEY", "")}
