@@ -1,4 +1,4 @@
-# Prerequisites
+## Prerequisites
 
 ### 1. Supabase
 
@@ -26,11 +26,11 @@ A Github App is needed to authenticate users using Github.
 4. Take the `Client ID` and `Client Secret` values and use them to populate the missing fields in the **Github Provider** setup in Supabase from the previous step.
 
 
-# Run the project locally
+## Run the project locally
 
 To run the project locally, follow the instructions below.
  
-### 1. Project Setup
+### 1. Project setup
 
 Clone the repository to your local machine:
 
@@ -85,7 +85,7 @@ Use your **ngrok domain** to access the API from your mobile phone.
 Additionally, you can access the server API at http://localhost:8000/
 
 
-# Deploying the project to Vercel
+## Deploying the project to Vercel
 
 #### 1. Create a Vercel Account
 If you haven't already, go to the [Vercel website](vercel.com) and sign up for a new account. You can sign up using your GitHub, GitLab, or email address.
