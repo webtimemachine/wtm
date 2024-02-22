@@ -40,6 +40,10 @@ app.include_router(router)
 async def login(request: Request, provider = "github"):
     return templates.TemplateResponse("login.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_KEY", "")})
 
+@app.get('/login-success')
+async def login(request: Request, provider = "github"):
+    return templates.TemplateResponse("login-success.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_KEY", "")})
+
 @app.get('/health')
 async def health():
     logging.debug('health')
