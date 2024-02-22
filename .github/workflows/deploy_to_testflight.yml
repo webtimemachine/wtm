@@ -6,9 +6,6 @@ on:
       - main
     tags:
       - 'v*.*.*'
-  pull_request:
-    branches: 
-      - main
 
 jobs:
   build-and-deploy:
@@ -30,15 +27,12 @@ jobs:
           bundle install
         working-directory: ./xcode-client
 
-      - name: Secrets to env
-        uses: shine1594/secrets-to-env-action@v1.6.1
-        with:
-          # json string of github repository secrets
-          secrets: ${{ toJSON(secrets) }}
-          secrets_env: all
-          overwrite_prod: false
-          file_name_prod: "./react-app/.env"
-          
+      - name: Setup .env file
+        run: |
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > ./.env
+          echo "REACT_APP_SUPABASE_URL=${{ secrets.REACT_APP_SUPABASE_URL }}" >> ./.env
+          echo "REACT_APP_SUPABASE_ANON_KEY=${{ secrets.REACT_APP_SUPABASE_ANON_KEY }}" >> ./.env
+        working-directory: ./react-app
       
       - name: Install Node.js Dependencies and Build React Native App
         run: |
@@ -83,17 +77,34 @@ jobs:
           fastlane beta
         working-directory: ./xcode-client
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get Release Upload URL
+        id: get_release
+        uses: actions/github-script@v5
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            // Extract the tag from context.ref by removing the 'refs/tags/' prefix
+            const tag = context.ref.replace('refs/tags/', '');
+            console.log(`Searching for the release associated with tag: ${tag}`);
+      
+            try {
+              const release = await github.rest.repos.getReleaseByTag({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                tag: tag
+              });
+      
+              // If the upload URL is found, set it as an output
+              if (release.data.upload_url) {
+                console.log(`Upload URL found: ${release.data.upload_url}`);
+                core.setOutput('upload_url', release.data.upload_url);
+              } else {
+                core.setFailed('Upload URL not found for the release.');
+              }
+            } catch (error) {
+              // Handle errors in getting the release by tag, such as if the release does not exist
+              core.setFailed(`Error fetching the release by tag: ${error.message}`);
+            }
 
       - name: Upload IPA to GitHub Releases
         uses: actions/upload-release-asset@v1
@@ -101,8 +112,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.get_release.outputs.upload_url }}
           asset_path: ./xcode-client/build/WebTimeMachine.ipa
           asset_name: WebTimeMachine.ipa
           asset_content_type: application/octet-stream
+
         

@@ -25,8 +25,12 @@ async def get_devices(request: Request):
                     
         return {'devices': devices}
     except Exception as error:
+        session.rollback()
         logging.error('Error while fetching devices:', exc_info=error)
         raise HTTPException(status_code=500, detail="An error occurred while fetching devices")
+    finally:
+        session.close()
+
 @router.get("/logs")
 async def get_logs(request: Request,limit: int = 50, offset: int = 0, deviceName: Optional[str] = None):
     print(request.headers.get('Refresh-Token'))
@@ -43,8 +47,11 @@ async def get_logs(request: Request,limit: int = 50, offset: int = 0, deviceName
         logsQuery = logsQuery.order_by(desc(Log.id)).filter(Log.userId == userId).limit(limit).offset(offset).all()
         return {'urls': logsQuery, 'count': count}
     except Exception as error:
+        session.rollback()
         logging.error('Error while fetching logs:', exc_info=error)
         raise HTTPException(status_code=500, detail="An error occurred while fetching logs")
+    finally:
+        session.close()
 
 class LogPost(BaseModel):
     title: str
@@ -60,9 +67,16 @@ async def index(request: Request, logPost: LogPost):
     supabaseSession = supabase.auth.set_session(request.headers.get('Authorization'), request.headers.get('Refresh-Token'))
 
     if url:
-        new_log = Log(url=url, title=title, browserName=ua.browser.family, browserVersion=ua.browser.version_string,
-                           osName=ua.os.family, osVersion=ua.os.version_string, userId=supabaseSession.user.id, deviceName=logPost.deviceName)
-        session.add(new_log)
-        session.commit()
+        try:
+            new_log = Log(url=url, title=title, browserName=ua.browser.family, browserVersion=ua.browser.version_string,
+                            osName=ua.os.family, osVersion=ua.os.version_string, userId=supabaseSession.user.id, deviceName=logPost.deviceName)
+            session.add(new_log)
+            session.commit()
+        except Exception as error:
+            session.rollback()
+            logging.error('Error while adding log:', exc_info=error)
+            raise HTTPException(status_code=500, detail="An error occurred while adding log")
+        finally:
+            session.close()
 
     return {'Ok': 'ok', "session": supabaseSession.session }
