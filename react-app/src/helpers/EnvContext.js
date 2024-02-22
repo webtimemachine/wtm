@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { getSetup, setInStorage, getFromStorage, deleteFromStorage, API_URL } from './Constants';
+import { getSetup, setInStorage, getFromStorage, deleteFromStorage, API_URL, DEFAULT_DEVICE_NAME } from './Constants';
 
 import { createClient } from "@supabase/supabase-js";
 
@@ -39,20 +39,22 @@ export const EnvContextProvider = ({ children }) => {
   const [supabase, setSupabase] = useState(null);
   const [providerState, setProviderState] = useState({
     supabase: supabase,
-    session: session
+    session: session,
+    deviceName: DEFAULT_DEVICE_NAME,
   });
   useEffect(() => {
     const cargarEstadoInicial = async () => {
       const local_API_URL = (await getFromStorage('API_URL')) || API_URL;
       let local_SUPABASE_URL = (await getFromStorage('SUPABASE_URL'));
       let local_SUPABASE_ANON_KEY = (await getFromStorage('SUPABASE_ANON_KEY'))
+      const deviceName = (await getFromStorage('deviceName')) || DEFAULT_DEVICE_NAME;
       if (!local_SUPABASE_URL || !local_SUPABASE_ANON_KEY) {
         const data = await getSetup(local_API_URL)
         console.log("SETUP:", data)
         local_SUPABASE_URL = data.supabaseUrl;
         local_SUPABASE_ANON_KEY = data.supabaseAnonKey;
       }
-      setProviderState({ ...providerState, API_URL: local_API_URL, SUPABASE_URL: local_SUPABASE_URL, SUPABASE_ANON_KEY: local_SUPABASE_ANON_KEY, supabase, session });
+      setProviderState({ ...providerState, API_URL: local_API_URL, SUPABASE_URL: local_SUPABASE_URL, SUPABASE_ANON_KEY: local_SUPABASE_ANON_KEY, supabase, session, deviceName });
       SetSupabaseInstance();
     };
 
@@ -94,6 +96,9 @@ export const EnvContextProvider = ({ children }) => {
       }
       if (providerState.SUPABASE_ANON_KEY) {
         await setInStorage('SUPABASE_ANON_KEY', providerState.SUPABASE_ANON_KEY);
+      }
+      if (providerState.deviceName !== DEFAULT_DEVICE_NAME) {
+        await setInStorage('deviceName', providerState.deviceName);
       }
     }
     save();

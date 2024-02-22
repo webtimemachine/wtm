@@ -22,15 +22,6 @@ export default function LogsMain() {
 
   const [ENVCONTEXT,] = useContext(EnvContext)
 
-  const [deviceName, setDeviceName] = useState(DEFAULT_DEVICE_NAME)
-
-  useEffect(() => {
-    getFromStorage("deviceName").then((result) => {
-      setDeviceName(result || DEFAULT_DEVICE_NAME)
-    })
-
-  }, [])
-
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
@@ -66,19 +57,12 @@ export default function LogsMain() {
     fetchUrls();
   }, []);
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setInStorage('deviceName', deviceName)
-    }, 1000) //this is because chrome.storage.sync.set has a limit
-
-    return () => clearTimeout(timerId) // clear the timeout just in case
-  }, [deviceName])
 
   const [selectedDevice, setSelectedDevice] = useState("All");
   return (
     <div className="border-b border-gray-200 pb-5 sm:pb-0 mt-2">
       <h3 onClick={()=>{console.log(ENVCONTEXT)}} className="text-base leading-6 text-gray-900">History</h3>
-      <p className="mt-1 text-sm text-gray-500">This device name: <input id="email" name="email" value={deviceName} onChange={(e) => setDeviceName(e.target.value)} required className="inline rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input></p>
+      <p className="mt-1 text-sm text-gray-500">This device name: <span id="email" name="email" required className="inline py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{ENVCONTEXT.deviceName}</span></p>
       <div className="mt-3 sm:mt-4">
         <div className="sm:hidden">
           <label htmlFor="current-tab" className="sr-only">

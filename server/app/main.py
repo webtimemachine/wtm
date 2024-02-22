@@ -40,6 +40,7 @@ app.include_router(router)
 async def login(request: Request, provider = "github"):
     return templates.TemplateResponse("login.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_KEY", "")})
 
+@app.get('/')
 @app.get('/login-success')
 async def login(request: Request, provider = "github"):
     return templates.TemplateResponse("login-success.html", {"request": request, "provider": provider, 'supabaseUrl': getenv("SUPABASE_URL", ""), 'supabaseAnonKey': getenv("SUPABASE_KEY", "")})
@@ -51,8 +52,11 @@ async def health():
     try:
         count = session.query(Log.deviceName).limit(0).count()
     except Exception as e:
+        session.rollback()
         logging.error(e)
         raise HTTPException(status_code=500, detail= "db error")
+    finally:
+        session.close()
     
     return {'version': API_VERSION, "time": time(), "db": count == 0}
 

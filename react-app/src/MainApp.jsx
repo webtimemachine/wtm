@@ -1,6 +1,7 @@
 import { Fragment, useState, useContext } from 'react'
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react'
 import {
+  ArrowRightCircleIcon,
   Bars3Icon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
@@ -8,6 +9,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import LogsMain from './components/LogsMain'
 import ChangeApiURL from './components/ChangeApiURL'
 import { EnvContext } from './helpers/EnvContext'
+import ChangeDeviceName from './components/ChangeDeviceName'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -58,9 +60,22 @@ export default function MainApp() {
               >
                 <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
 
-                  <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                  <div className="grid grid-cols-1 divide-x divide-gray-900/5 bg-gray-50">
 
-                  <ChangeApiURL></ChangeApiURL>
+                    <div className="p-4">
+                    <ChangeApiURL></ChangeApiURL>
+                    </div>
+                    <div className="p-4">
+                    <ChangeDeviceName></ChangeDeviceName>
+                    </div>
+                    <div className="p-4">
+                    <div onClick={()=>{ENVCONTEXT.supabase.auth.signOut("local")}} className="cursor-pointer flex w-full items-center justify-between rounded-lg py-2 pr-3.5 text-base font-semibold leading-7 text-red-500 hover:bg-gray-50">
+                        Log out
+                        <ArrowRightCircleIcon
+                          className={classNames('h-5 w-5 flex-none')}
+                          aria-hidden="true" />
+                      </div>
+                    </div>
 
                   </div>
                 </Popover.Panel>
@@ -88,20 +103,40 @@ export default function MainApp() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
                 <div className="space-y-2 py-6">
-                  <Disclosure as="div" className="-mx-3">
+                  <Disclosure defaultOpen={true} as="div" className="-mx-3">
                     {({ open }) => (
                       <>
-                        <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                        <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
                           Settings
                           <ChevronDownIcon
                             className={classNames(open ? 'rotate-180' : '', 'h-5 w-5 flex-none')}
                             aria-hidden="true" />
                         </Disclosure.Button>
                         <Disclosure.Panel className="mt-2 space-y-2">
+
                           <ChangeApiURL></ChangeApiURL>
+                          <ChangeDeviceName></ChangeDeviceName>
+
                         </Disclosure.Panel>
                       </>
                     )}
+                  </Disclosure>
+                </div>
+              </div>
+            </div>
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray-500/10">
+                <div className="space-y-2 py-6">
+                  <Disclosure as="div" className="-mx-3">
+
+                    <>
+                      <Disclosure.Button onClick={()=>{ENVCONTEXT.supabase.auth.signOut("local")}} className="flex w-full items-center justify-between rounded-lg py-2 pr-3.5 text-base font-semibold leading-7 text-red-500 hover:bg-gray-50">
+                        Log out
+                        <ArrowRightCircleIcon
+                          className={classNames('h-5 w-5 flex-none')}
+                          aria-hidden="true" />
+                      </Disclosure.Button>
+                    </>
                   </Disclosure>
                 </div>
               </div>

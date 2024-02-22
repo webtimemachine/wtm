@@ -12,10 +12,13 @@ const ChangeApiURL = () => {
     const [ENVCONTEXT, setEnvContext] = useContext(EnvContext)
 
     const [serverUrl, setServerUrl] = useState(ENVCONTEXT["API_URL"])
+    const [serverUrlDisable, setServerUrlDisable] = useState(false)
 
     const changeServerUrl = (e) => {
         if (e.key === "Enter") {
+            setServerUrlDisable(true)
             getSetup(serverUrl).then((data) => {
+                setServerUrlDisable(false)
                 if (data.version) {
                     ENVCONTEXT.supabase.auth.signOut("local");
                     setEnvContext({ ...ENVCONTEXT, API_URL: serverUrl, SUPABASE_URL: data.supabaseUrl, SUPABASE_ANON_KEY: data.supabaseAnonKey })
@@ -25,6 +28,7 @@ const ChangeApiURL = () => {
                 }
             }).catch((error) => {
                 console.error("Error changing server URL", error)
+                setServerUrlDisable(false)
                 setOpen(true)
             })
         }
@@ -95,6 +99,7 @@ const ChangeApiURL = () => {
                     type="url"
                     name="apiurl"
                     id="apiurl"
+                    disabled={serverUrlDisable}
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="https://yourAPIdomain.com"
                     aria-describedby="email-description" value={serverUrl} onChange={(e) => {
