@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
 import Logs from "./Logs"
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
+import { EnvContext } from '../helpers/EnvContext';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-import { DEFAULT_DEVICE_NAME, API_URL, getFromStorage, setInStorage } from "./Constants";
-import { supabase } from "./supabaseClient";
-
+import { DEFAULT_DEVICE_NAME, API_URL, getFromStorage, setInStorage } from "../helpers/Constants";
 
 // const tabs = [
 //   { name: 'All', href: '#', current: true, device: 'All'},
@@ -19,9 +18,9 @@ import { supabase } from "./supabaseClient";
 //   { name: 'Android', href: '#', current: false, device : 'Android'}
 // ]
 
-const userId = 1
-
 export default function LogsMain() {
+
+  const [ENVCONTEXT,] = useContext(EnvContext)
 
   const [deviceName, setDeviceName] = useState(DEFAULT_DEVICE_NAME)
 
@@ -36,13 +35,12 @@ export default function LogsMain() {
 
   useEffect(() => {
     async function fetchUrls() {
-      const { data: { session }, error } = await supabase.auth.getSession();
-      if (session != null && error == null) {
-        fetch(API_URL + `/devices?userId=${userId}`, {
+      if (ENVCONTEXT.session) {
+        fetch(ENVCONTEXT.API_URL + `/devices`, {
           headers: new Headers({
             "ngrok-skip-browser-warning": "69420",
-            "Authorization": session.access_token,
-            "refresh-token": session.refresh_token,
+            "Authorization": ENVCONTEXT.session.access_token,
+            "refresh-token": ENVCONTEXT.session.refresh_token,
           }),
         })
           .then(response => response.json())
@@ -56,8 +54,6 @@ export default function LogsMain() {
             newTabs.unshift({ name: 'All', href: '#', current: true, device: 'All' });
             setTabs(newTabs);
           });
-      } else {
-        console.error("[LOGSMAIN] error getting session", error, session);
       }
     }
     fetchUrls();
@@ -74,7 +70,7 @@ export default function LogsMain() {
   const [selectedDevice, setSelectedDevice] = useState("All");
   return (
     <div className="border-b border-gray-200 pb-5 sm:pb-0 mt-2">
-      <h3 className="text-base font-semibold leading-6 text-gray-900">History</h3>
+      <h3 onClick={()=>{console.log(ENVCONTEXT)}} className="text-base leading-6 text-gray-900">History</h3>
       <p className="mt-1 text-sm text-gray-500">This device name: <input id="email" name="email" value={deviceName} onChange={(e) => setDeviceName(e.target.value)} required className="inline rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input></p>
       <div className="mt-3 sm:mt-4">
         <div className="sm:hidden">

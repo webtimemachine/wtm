@@ -1,18 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react'
-import {
-  Router
-} from 'react-chrome-extension-router'
+import Login from './components/Login'
+import MainApp from './MainApp'
+import {EnvContextProvider} from './helpers/EnvContext';
 
-import Login from './Login'
-import { supabase } from './supabaseClient'
-import LogsMain from './LogsMain'
+import { inExtension } from "./helpers/Constants";
 
-import { inExtension } from "./Constants";
+import AppRouter from './AppRouter';
 
 
 const App = () => {
-  const [session, setSession] = useState(null)
 
   useEffect(() => {
 
@@ -24,15 +21,6 @@ const App = () => {
     //     setSession(session)        
     //   }
     // })
-
-    supabase.auth.onAuthStateChange((event, session) => {
-      console.log('[App.js] Auth state change', event, session, session !== null)
-      if (session !== null) {
-        setSession(session)
-      } else {
-        supabase.auth.refreshSession().then(console.log)
-      }
-    })
 
   }, [])
 
@@ -46,11 +34,9 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <div className="p-4 mx-auto bg-white rounded-xl shadow-md">
-        {session ? (inExtension ? <LogsMain /> : <h1>Please follow on the extension</h1>) : <Login message='Welcome to the extension' />}
-      </div>
-    </Router>
+    <EnvContextProvider>
+      <AppRouter></AppRouter>
+    </EnvContextProvider>
   )
 }
 

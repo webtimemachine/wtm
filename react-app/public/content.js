@@ -1,5 +1,6 @@
-import { supabase } from '../src/supabaseClient'
-import { API_URL, SUPABASE_URL, SUPABASE_ANON_KEY, setInStorage, getFromStorage } from '../src/Constants';
+import { setInStorage, getFromStorage,deleteFromStorage } from '../src/helpers/Constants';
+
+import { createClient } from "@supabase/supabase-js";
 
 // chrome.storage.onChanged.addListener((changes, namespace) => {
 //   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
@@ -10,6 +11,37 @@ import { API_URL, SUPABASE_URL, SUPABASE_ANON_KEY, setInStorage, getFromStorage 
 //   }
 // }
 // );
+
+async function loadSupabase(){
+  const API_URL = await getFromStorage("API_URL")
+  const SUPABASE_URL = await getFromStorage("SUPABASE_URL")
+  const SUPABASE_ANON_KEY = await getFromStorage("SUPABASE_ANON_KEY")
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+        detectSessionInUrl: true,
+        persistSession : true,
+        storage: {
+            getItem: (key) => {
+                return getFromStorage(key);
+            },
+            setItem: (key, data) => {
+                setInStorage(key, data);
+            },
+            removeItem: (key) => {
+                deleteFromStorage(key);
+            }
+        }
+    },
+  });
+  return {
+    API_URL,
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY,
+    supabase
+  }
+}
+
+const {API_URL, supabase} = await loadSupabase()
 
 async function postData(data) {
   let deviceName = await getFromStorage('deviceName')

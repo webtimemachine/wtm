@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import fontawesome from '@fortawesome/fontawesome'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChrome, faFirefox, faEdge, faInternetExplorer, faSafari, faOpera } from '@fortawesome/free-brands-svg-icons'
 import moment from 'moment';
-import { API_URL, getFromStorage } from "./Constants";
-import { supabase } from './supabaseClient';
+import { EnvContext } from '../helpers/EnvContext';
 
 fontawesome.library.add(faChrome, faFirefox, faEdge, faInternetExplorer, faSafari, faOpera);
 
@@ -13,32 +12,33 @@ const PAGESIZE = 50;
 
 export default function Logs(selectedDevice = undefined) {
 
+    const [ENVCONTEXT,] = useContext(EnvContext);
 
     const [logs, setLogs] = useState([]);
     const [currentPage,] = useState(0);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        console.log('Fetching logs',[currentPage, selectedDevice.selectedDevice]);
         async function fetchUrls() {
             setLoading(true);
-            const {data:{session}, data} = await supabase.auth.getSession();
-            if (session) {
-                const response = await fetch(API_URL + `/logs?offset=${currentPage * PAGESIZE}&deviceName=${selectedDevice.selectedDevice}`, {
+            if (ENVCONTEXT.session) {
+                const response = await fetch(ENVCONTEXT.API_URL + `/logs?offset=${currentPage * PAGESIZE}&deviceName=${selectedDevice.selectedDevice}`, {
                     headers: new Headers({
                         "ngrok-skip-browser-warning": "69420",
-                        "Authorization": session.access_token,
-                        "refresh-token": session.refresh_token,
+                        "Authorization": ENVCONTEXT.session.access_token,
+                        "refresh-token": ENVCONTEXT.session.refresh_token,
                     }),
                 });
                 const data = await response.json();
-                console.log(data.urls.map((a) => { return a.osName }));
+                // console.log(data.urls.map((a) => { return a.osName }));
                 setLoading(false);
                 setLogs(data.urls);
             }
         }
 
         fetchUrls();
-    }, [currentPage, selectedDevice]);
+    }, [currentPage, selectedDevice.selectedDevice]);
 
     function deviceIcon(log) {
         let foundDevice = undefined;
@@ -98,7 +98,7 @@ export default function Logs(selectedDevice = undefined) {
     const [filteredLogs, setFilteredLogs] = useState(logs);
 
     useEffect(() => {
-        console.log(selectedDevice.selectedDevice);
+        // console.log(selectedDevice.selectedDevice);
         if (selectedDevice.selectedDevice == "All") {
             return setFilteredLogs(logs);
         }
@@ -107,7 +107,7 @@ export default function Logs(selectedDevice = undefined) {
         } else {
             setFilteredLogs(logs);
         }
-    }, [selectedDevice, logs])
+    }, [selectedDevice.selectedDevice, logs])
 
     return (
         loading ? <div className="flex justify-center items-center h-32">

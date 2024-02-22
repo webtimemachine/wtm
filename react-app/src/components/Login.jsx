@@ -1,6 +1,6 @@
-// import { useState } from 'react'
-import { API_URL, inExtension } from './Constants';
-import { supabase } from './supabaseClient'
+import { useContext } from 'react'
+import { inExtension } from '../helpers/Constants';
+import { EnvContext } from '../helpers/EnvContext'
 // import {
 //     Link
 // } from 'react-chrome-extension-router'
@@ -8,6 +8,7 @@ import { supabase } from './supabaseClient'
 
 
 export default function Auth() {
+    const [ENVCONTEXT,] = useContext(EnvContext)
     // const [loading, setLoading] = useState(false)
     // const [email, setEmail] = useState('')
 
@@ -28,10 +29,10 @@ export default function Auth() {
 
         // eslint-disable-next-line no-undef
         if (!inExtension) {
-            await supabase.auth.signInWithOAuth({
+            await ENVCONTEXT.supabase.auth.signInWithOAuth({
                 provider: provider,
                 "options": {
-                    "redirect_to": API_URL + "/login?provider=" + provider
+                    "redirect_to": ENVCONTEXT.API_URL + "/login?provider=" + provider
                 }
             });
         }
@@ -43,7 +44,7 @@ export default function Auth() {
                 <h1 className="header">Log in your account to mantain synced your different devices browsing history</h1>
                 <br></br>
                 {/* eslint-disable-next-line no-undef */}
-                {!inExtension ? <button onClick={handleProviderLogin}>Sign in with Github</button> : <a target='_BLANK' href={API_URL + "/login?provider=github"} rel="noreferrer">Sign in with Github</a>}
+                {!inExtension ? <button onClick={handleProviderLogin}>Sign in with Github</button> : <a target='_BLANK' href={ENVCONTEXT.API_URL + "/login?provider=github"} rel="noreferrer">Sign in with Github</a>}
                 {/* <p className="description">Sign in via magic link with your email below</p>
                 <form className="form-widget" onSubmit={handleLogin}>
                     <div>
