@@ -70,6 +70,7 @@ Replace `<your-ngrok-auth-token>` and `<your-ngrok-domain>` with your actual Ngr
 Start the project using Docker compose:
 
 ```bash
+docker compose build
 docker compose up
 ```
 
