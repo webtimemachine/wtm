@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		074BFE232B8790810068A63B /* proyectos Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84961AAB2B51C39C000471F8 /* proyectos Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		074BFE272B87908A0068A63B /* proyectos Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84961AB52B51C39C000471F8 /* proyectos Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8467C6662B5599DA00B682F9 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 8467C6652B5599DA00B682F9 /* background.js */; };
 		8467C6672B5599DA00B682F9 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 8467C6652B5599DA00B682F9 /* background.js */; };
 		8467C6682B5599DA00B682F9 /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 8467C6652B5599DA00B682F9 /* background.js */; };
@@ -75,6 +77,48 @@
 		84B688FC2B7451FB00CD9133 /* content.bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 84B688F72B7451FB00CD9133 /* content.bundle.js */; };
 		84B688FD2B7451FB00CD9133 /* content.bundle.js in Resources */ = {isa = PBXBuildFile; fileRef = 84B688F72B7451FB00CD9133 /* content.bundle.js */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		074BFE242B8790810068A63B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84961A792B51C39B000471F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84961AAA2B51C39C000471F8;
+			remoteInfo = "ttm Extension (iOS)";
+		};
+		074BFE282B87908A0068A63B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84961A792B51C39B000471F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84961AB42B51C39C000471F8;
+			remoteInfo = "ttm Extension (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		074BFE262B8790810068A63B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				074BFE232B8790810068A63B /* proyectos Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		074BFE2A2B87908A0068A63B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				074BFE272B87908A0068A63B /* proyectos Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8467C6652B5599DA00B682F9 /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = background.js; sourceTree = "<group>"; };
@@ -150,6 +194,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		074BFE222B8790810068A63B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84961A782B51C39B000471F8 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +211,7 @@
 				84961AAF2B51C39C000471F8 /* iOS (Extension) */,
 				84961AB92B51C39C000471F8 /* macOS (Extension) */,
 				84961A8D2B51C39C000471F8 /* Products */,
+				074BFE222B8790810068A63B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -278,10 +330,12 @@
 				84961A882B51C39C000471F8 /* Sources */,
 				84961A892B51C39C000471F8 /* Frameworks */,
 				84961A8A2B51C39C000471F8 /* Resources */,
+				074BFE262B8790810068A63B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				074BFE252B8790810068A63B /* PBXTargetDependency */,
 			);
 			name = "ttm (iOS)";
 			productName = "proyectos (iOS)";
@@ -295,10 +349,12 @@
 				84961A9A2B51C39C000471F8 /* Sources */,
 				84961A9B2B51C39C000471F8 /* Frameworks */,
 				84961A9C2B51C39C000471F8 /* Resources */,
+				074BFE2A2B87908A0068A63B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				074BFE292B87908A0068A63B /* PBXTargetDependency */,
 			);
 			name = "ttm (macOS)";
 			productName = "proyectos (macOS)";
@@ -512,6 +568,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		074BFE252B8790810068A63B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84961AAA2B51C39C000471F8 /* ttm Extension (iOS) */;
+			targetProxy = 074BFE242B8790810068A63B /* PBXContainerItemProxy */;
+		};
+		074BFE292B87908A0068A63B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84961AB42B51C39C000471F8 /* ttm Extension (macOS) */;
+			targetProxy = 074BFE282B87908A0068A63B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		84961A7F2B51C39B000471F8 /* Main.html */ = {
