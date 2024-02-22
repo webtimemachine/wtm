@@ -1,16 +1,20 @@
-# web-time-machine
+# The Web Time Machine
 
+It's like a Time Machine for your browser. Search through everything you've seen and find that thing you don't know where you looked up. It supports multiple devices
 
-## Setup
+## Server status
 
-To run it in your local enviroment, create a NGROK account and get your token from [here](https://dashboard.ngrok.com/get-started/your-authtoken).
+Keep track of system operations and incident history by checking the [Server Status](https://thewebtimemachine.cronitorstatus.com/). Stay informed about our platform's performance and any ongoing issues.
 
-Use the following commands to run the server in your local enviroment:
+## Backend
 
-```bash
-cd fast-api/
-export NGROK_AUTHTOKEN=2L3Ov... # Your ngrok token
-docker compose up
-```
+The backend is a Python API. Check the following guides to run a local backend, or deploy your own version to Vercel.
 
-This will run the server in your local environment and expose it to the internet using NGROK. The ngrok link will be config in the extension automatically.
+- [Run the Python API locally](./server/README.md#run-the-project-locally)
+- [Deploy the Python API to Vercel](./server/README.md#deploying-the-project-to-vercel)
+
+## Browser Extension
+
+The browser Extension for Safari and Chrome is built using [React](https://react.dev/). Leveraging React allows us to develop and maintain the extensions efficiently, while also benefiting from a dynamic ecosystem of libraries, tools, and community support.
+
+- Check this guide to [Build and Run the Extention in your computer browser](./react-app/README.md#run-the-extension-locally)
