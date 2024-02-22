@@ -17,11 +17,13 @@ const ChangeApiURL = () => {
     const changeServerUrl = (e) => {
         if (e.key === "Enter") {
             setServerUrlDisable(true)
-            getSetup(serverUrl).then((data) => {
+            const parsedUrl = new URL(serverUrl)
+            const url = `${parsedUrl.protocol}//${parsedUrl.hostname}`
+            getSetup(url).then((data) => {
                 setServerUrlDisable(false)
                 if (data.version) {
                     ENVCONTEXT.supabase.auth.signOut("local");
-                    setEnvContext({ ...ENVCONTEXT, API_URL: serverUrl, SUPABASE_URL: data.supabaseUrl, SUPABASE_ANON_KEY: data.supabaseAnonKey })
+                    setEnvContext({ ...ENVCONTEXT, API_URL: url, SUPABASE_URL: data.supabaseUrl, SUPABASE_ANON_KEY: data.supabaseAnonKey })
                     console.log("Server URL changed to", ENVCONTEXT, data)
                 } else {
                     setOpen(true)
