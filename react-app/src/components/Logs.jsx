@@ -23,17 +23,21 @@ export default function Logs(selectedDevice = undefined) {
         async function fetchUrls() {
             setLoading(true);
             if (ENVCONTEXT.session) {
-                const response = await fetch(ENVCONTEXT.API_URL + `/logs?offset=${currentPage * PAGESIZE}&deviceName=${selectedDevice.selectedDevice}`, {
-                    headers: new Headers({
-                        "ngrok-skip-browser-warning": "69420",
-                        "Authorization": ENVCONTEXT.session.access_token,
-                        "refresh-token": ENVCONTEXT.session.refresh_token,
-                    }),
-                });
-                const data = await response.json();
-                // console.log(data.urls.map((a) => { return a.osName }));
-                setLoading(false);
-                setLogs(data.urls);
+                try {
+                    const response = await fetch(ENVCONTEXT.API_URL + `/logs?offset=${currentPage * PAGESIZE}&deviceName=${selectedDevice.selectedDevice}`, {
+                        headers: new Headers({
+                            "ngrok-skip-browser-warning": "69420",
+                            "Authorization": ENVCONTEXT.session.access_token,
+                            "refresh-token": ENVCONTEXT.session.refresh_token,
+                        }),
+                    });
+                    const data = await response.json();
+                    // console.log(data.urls.map((a) => { return a.osName }));
+                    setLoading(false);
+                    setLogs(data.urls);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
         }
 
@@ -100,12 +104,12 @@ export default function Logs(selectedDevice = undefined) {
     useEffect(() => {
         // console.log(selectedDevice.selectedDevice);
         if (selectedDevice.selectedDevice == "All") {
-            return setFilteredLogs(logs);
+            return setFilteredLogs((logs || []));
         }
         if (selectedDevice.selectedDevice) {
-            setFilteredLogs(logs.filter((log) => log.deviceName === selectedDevice.selectedDevice));
+            setFilteredLogs((logs || []).filter((log) => log.deviceName === selectedDevice.selectedDevice));
         } else {
-            setFilteredLogs(logs);
+            setFilteredLogs((logs || []));
         }
     }, [selectedDevice.selectedDevice, logs])
 
@@ -114,10 +118,10 @@ export default function Logs(selectedDevice = undefined) {
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900" />
         </div> :
             <ul role="list" className="divide-y divide-gray-100">
-                {filteredLogs.length === 0 && <li className="py-5">
+                {(filteredLogs || []).length === 0 && <li className="py-5">
                     <p className="text-sm leading-5 text-gray-500">No logs found yet. Set a device name and start browsing</p>
                 </li>}
-                {filteredLogs.map((log) => (
+                {(filteredLogs || []).map((log) => (
                     <li key={log.id} className="relative flex justify-between gap-x-6 py-5">
                         <div className="flex min-w-0 gap-x-4">
                             <div className="flex-none w-14 h-14 flex items-center justify-center">

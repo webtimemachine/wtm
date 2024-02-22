@@ -45,15 +45,22 @@ export default function LogsMain() {
         })
           .then(response => response.json())
           .then(data => {
-            const newTabs = data.devices.map(device => ({
-              name: device,
-              href: '#',
-              current: false,
-              device: device
-            }));
-            newTabs.unshift({ name: 'All', href: '#', current: true, device: 'All' });
+            let newTabs
+            if (data.devices) {
+              newTabs = data.devices.map(device => ({
+                name: device,
+                href: '#',
+                current: false,
+                device: device
+              }));
+              newTabs.unshift({ name: 'All', href: '#', current: true, device: 'All' });
+            } else {
+              newTabs = [{ name: 'All', href: '#', current: true, device: 'All' }]
+            }
             setTabs(newTabs);
-          });
+          }).catch((error) => {
+            console.error('Error:', error);
+          })
       }
     }
     fetchUrls();
