@@ -4,6 +4,8 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
 from os import getenv
 import logging
+import re
+
 
 try:
     load_dotenv("../.env")
@@ -14,6 +16,10 @@ dburi = getenv('POSTGRES_URL')
 if dburi and dburi.startswith("postgres://"):
     # This is necessary for the app to work on Vercel
     dburi = dburi.replace("postgres://", "postgresql://", 1)
+    
+# This is to clean the dburi of any query parameters 
+dburi = re.sub(r"[?&]supa=[^&]*", "", dburi
+dburi = re.sub(r"\?$", "", dburi))
 
 engine = create_engine(dburi)
 Session = sessionmaker(bind=engine)
