@@ -45,7 +45,7 @@ const {API_URL, supabase} = await loadSupabase()
 
 async function postData(data) {
   let deviceName = await getFromStorage('deviceName')
-  console.log('[Normal use] get session', deviceName, data)
+  // console.log('[Normal use] get session', deviceName, data)
   if (data) {
     fetch(API_URL, {
       method: 'POST',
@@ -75,9 +75,9 @@ if (window.location.hash) {
   if (urlData.access_token && urlData.refresh_token) {
     processing = true;
     let loadedSession = await supabase.auth.setSession(urlData)
-    console.log("[CONTENT] set session:", loadedSession);
+    // console.log("[CONTENT] set session:", loadedSession);
     if (loadedSession.error) {
-      console.log("[CONTENT] error:", loadedSession.error);
+      // console.log("[CONTENT] error:", loadedSession.error);
     } else {
       postData(loadedSession.data.session);      
     }

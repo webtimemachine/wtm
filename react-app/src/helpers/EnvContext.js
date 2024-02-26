@@ -8,7 +8,6 @@ export const EnvContext = createContext();
 
 export const EnvContextProvider = ({ children }) => {
   function SetSupabaseInstance() {
-    console.log('SetSupabaseInstance', providerState.SUPABASE_URL, providerState.SUPABASE_ANON_KEY);
     if (!providerState.SUPABASE_URL || !providerState.SUPABASE_ANON_KEY) {
       return
     }
@@ -50,7 +49,6 @@ export const EnvContextProvider = ({ children }) => {
       const deviceName = (await getFromStorage('deviceName')) || DEFAULT_DEVICE_NAME;
       if (!local_SUPABASE_URL || !local_SUPABASE_ANON_KEY) {
         const data = await getSetup(local_API_URL)
-        console.log("SETUP:", data)
         local_SUPABASE_URL = data.supabaseUrl;
         local_SUPABASE_ANON_KEY = data.supabaseAnonKey;
       }
@@ -69,7 +67,6 @@ export const EnvContextProvider = ({ children }) => {
     setProviderState({ ...providerState, supabase });
     if (supabase !== null) {
       supabase.auth.onAuthStateChange((event, session) => {
-        console.log('Auth event', event, session);
         if (event === 'SIGNED_IN') {
           setSession(session);
           setProviderState({ ...providerState, session, supabase });

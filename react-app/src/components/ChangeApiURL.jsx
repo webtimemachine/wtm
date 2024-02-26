@@ -24,12 +24,10 @@ const ChangeApiURL = () => {
                 if (data.version) {
                     ENVCONTEXT.supabase.auth.signOut("local");
                     setEnvContext({ ...ENVCONTEXT, API_URL: url, SUPABASE_URL: data.supabaseUrl, SUPABASE_ANON_KEY: data.supabaseAnonKey })
-                    console.log("Server URL changed to", ENVCONTEXT, data)
                 } else {
                     setOpen(true)
                 }
             }).catch((error) => {
-                console.error("Error changing server URL", error)
                 setServerUrlDisable(false)
                 setOpen(true)
             })

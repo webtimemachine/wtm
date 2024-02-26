@@ -11,19 +11,6 @@ import AppRouter from './AppRouter';
 
 const App = () => {
 
-  useEffect(() => {
-
-    console.log("[App.js] Init", window.location.hash);
-
-    // supabase.auth.getSession().then(({ data: { session } }) => {
-    //   console.log('[App.js] Get session', session, session === null)
-    //   if (session !== null) {
-    //     setSession(session)        
-    //   }
-    // })
-
-  }, [])
-
   if (/Mobi|Android/i.test(navigator.userAgent)) {
     document.querySelector('html').classList.add('mobile')
   } else {
