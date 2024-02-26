@@ -36,9 +36,25 @@ npm start
 
 ### 2. run `npm run build`
 
-### 3. In the folder called `react-app/build` you will have the umpacked version of the extension. You can use this build with testing purpouse. The repo has a pipeline that makes a `.crx` for you. Just enter on the secrets the `API_URL` and it should work.
+### 3. In the folder called `react-app/build` you will have the unpacked version of the extension. You can use this build with testing purpouse. The repo has a pipeline that makes a `.crx` for you. Just enter on the secrets the `API_URL` and it should work.
 
-### 4. To install the .crx file, please open this URL in Chrome `chrome://extensions/`, activate the `develpment mode` and then drag and drop the file into the browser
+### 3. Access Chrome Extensions Settings
+- Click on the **Settings** icon located in the top-right corner of your Chrome browser. It resembles three vertically aligned dots, also known as the 'hamburger' icon.
+
+### 4. Navigate to Extensions
+- From the dropdown menu, hover over the **Tools** option, then select **Extensions**.
+
+### 5,
+- Once on the Extensions page, locate the toggle button labeled **Developer mode** in the top-right corner of the screen. Toggle it to the 'On' position. This action enables Developer Mode, allowing you to manually install extensions.
+
+### 6. Drag and Drop the .crx File
+- Locate the .crx extension file you wish to install. Typically, these files are found in your Downloads directory or the location where you saved them.
+- Click and hold the .crx file, then drag it onto the Extensions page opened in Step 2.
+- Release the file onto the Extensions page. You'll notice a prompt confirming the installation of the extension.
+
+### Step 5: Install the Extension
+- After dropping the .crx file onto the Extensions page, a confirmation dialog should appear asking if you want to add the extension. Click on the **Add extension** button to proceed.
+- Chrome will begin installing the extension. Once completed, you'll see a notification confirming the successful installation.
 
 ## Test the extension on Safari
 
