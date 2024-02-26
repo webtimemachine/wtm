@@ -2,6 +2,8 @@
 from sqlalchemy import create_engine, Column, Integer, String, func, DateTime, ForeignKey, UUID
 from sqlalchemy.orm import sessionmaker, declarative_base
 from dotenv import load_dotenv
+from pydantic import BaseModel
+from typing import Optional
 from os import getenv
 import logging
 import re
@@ -61,3 +63,11 @@ try:
     Base.metadata.create_all(engine)
 except Exception as e:
     logging.error(f"Error creating tables: {e}", exc_info=e)
+
+
+class LogPost(BaseModel):
+    title: str
+    url: str
+    # Making content optional
+    content: Optional[str] = None
+    deviceName: Optional[str] = None
