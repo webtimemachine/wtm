@@ -58,14 +58,14 @@ npm start
 
 ## Test the extension on Safari
 
-### It's mandatory being in mac with the last version of xcode
+It's mandatory being in mac with the last version of xcode
 
-### 1. Change the `bundle identifier` to one by our own. Notice that the extension bundle is a little bit different, respect that because you will need it in the next steps.
+- 1. Change the `bundle identifier` to one by our own. Notice that the extension bundle is a little bit different, respect that because you will need it in the next steps.
 
-### 2. Make sure that `Automatically manage signing` is enabled
+- 2. Make sure that `Automatically manage signing` is enabled
 
-### 3. In the file `Web-Time-Machine > Shared (App) > ViewController.swift` change the variable called `extensionBundleIdentifier` to your extension bundle identifier
+- 3. In the file `Web-Time-Machine > Shared (App) > ViewController.swift` change the variable called `extensionBundleIdentifier` to your extension bundle identifier
 
-### 4. You are ready for testing in your own iPhone, iPad or Mac. Just run the desiered schema and test it.
+- 4. You are ready for testing in your own iPhone, iPad or Mac. Just run the desiered schema and test it.
 
-### 5. For publishing purpouse, there is a pipeline that make all the job [Link to pipeline](../.github/workflows/deploy_to_testflight.yml)
+- 5. For publishing purpouse, there is a pipeline that make all the job [Link to pipeline](../.github/workflows/deploy_to_testflight.yml)
