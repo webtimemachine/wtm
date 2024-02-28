@@ -106,7 +106,9 @@ vercel init
 ```
 
 #### 4. Setup your Vercel project
-Go to your Vercel new project. In **Settings**, make sure the root directory is `server/app/`. Then, update your **Environment Variables** with your Supabase information from previous steps.
+Go to your Vercel new project. In **Settings**, make sure the root directory is `server/app/`. Then, update your **Environment Variables** connecting with your Supabase project from previous steps. The connect option is in `Settings > Integrations > Vercel Integration` then select your Vercel organization. Click on `Add new project connection`, choose your Supabase project and Vercel project and then click on `Connect project`
+
+Please be sure that you had changed the callback url on Supabase. For that, go to `Authentication > URL Configuration > Site URL` and change it to your Vercel deployed API URL.
 
 #### 5. Deploy your project to Vercel
 Once your project is set up, you can deploy it to Vercel by running the following command:

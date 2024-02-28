@@ -17,4 +17,6 @@ The backend is a Python API. Check the following guides to run a local backend, 
 
 The browser Extension for Safari and Chrome is built using [React](https://react.dev/). Leveraging React allows us to develop and maintain the extensions efficiently, while also benefiting from a dynamic ecosystem of libraries, tools, and community support.
 
-- Check this guide to [Build and Run the Extention in your computer browser](./react-app/README.md#run-the-extension-locally)
+- Check this guide to [Build the extension](./react-app/README.md#build-the-web-extension)
+- Test the extension [in Goolge Chrome](./react-app/README.md#test-the-extension-in-chrome)
+- Test the extension [in Safary](./react-app/README.md#test-the-extension-on-safari)
