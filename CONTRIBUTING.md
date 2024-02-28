@@ -8,7 +8,7 @@ We want to make contributing to this project as easy and transparent as possible
 - Proposing new features
 - Becoming a maintainer
 
-## We Develop with Github
+## We develop with Github
 We use Github to host code, to track issues and feature requests, as well as accept pull requests.
 
 ## We Use feature branches and the PR to master
