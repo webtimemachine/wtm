@@ -44,7 +44,7 @@ Navigate to the project directory:
 cd wtm/server
 ```
 
-Rename the `sample.env` file to `.env`.
+Rename the `sample.env` file to `.env`. Fill it with the Supabase data. Note that `POSTGRES_URL` has a default value, let that value as default if you want to use Docker Compose.
 
 ### 2. Dependencies
 
