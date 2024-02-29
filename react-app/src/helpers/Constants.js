@@ -9,7 +9,7 @@ export async function getFromStorage(payload) {
         // eslint-disable-next-line no-undef
         const data = (await chrome.storage.sync.get(payload))[payload]
         // eslint-disable-next-line no-undef
-        console.log('getFromStorageChrome', payload, await chrome.storage.sync.get(payload));
+        // console.log('getFromStorageChrome', payload, await chrome.storage.sync.get(payload));
         return data
     } else {
         try {
@@ -24,7 +24,7 @@ export async function setInStorage(key, payload) {
     // eslint-disable-next-line no-undef
     if (inExtension) {
         const toPost = { [key]: payload }
-        console.log('setInStorageChrome', payload);
+        // console.log('setInStorageChrome', payload);
         // eslint-disable-next-line no-undef
         await chrome.storage.sync.set(toPost)
     } else {
@@ -40,7 +40,7 @@ export async function deleteFromStorage(key) {
     // console.log('deleteFromStorage', key, inExtension);
     // eslint-disable-next-line no-undef
     if (inExtension) {
-        console.log('deleteFromStorageChrome', key);
+        // console.log('deleteFromStorageChrome', key);
         // eslint-disable-next-line no-undef
         await chrome.storage.sync.remove(key)
     } else {

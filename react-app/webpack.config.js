@@ -6,7 +6,7 @@ const fs = require('fs');
 module.exports = (env, argv) => {
   const envPath = env.ENVIRONMENT ? `.env.${env.ENVIRONMENT}` : '.env';
   
-  console.log('[WEBPACK]', env.ENVIRONMENT, envPath);
+  // console.log('[WEBPACK]', env.ENVIRONMENT, envPath);
 
   // Load .env file if it exists, otherwise load from process.env
   if (fs.existsSync(envPath)) {

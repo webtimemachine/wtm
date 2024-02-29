@@ -28,7 +28,7 @@ logging.basicConfig(filename='info.log', level=logging.INFO, format='%(asctime)s
 
 API_VERSION = getenv("API_VERSION", "0.1.0")
 
-logging.info('Starting app', API_VERSION)
+logging.info('Starting app %s', API_VERSION)
 
 app.include_router(supabaseRouter)
 app.include_router(router)

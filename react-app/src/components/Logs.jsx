@@ -19,7 +19,6 @@ export default function Logs(selectedDevice = undefined) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log('Fetching logs',[currentPage, selectedDevice.selectedDevice]);
         async function fetchUrls() {
             setLoading(true);
             if (ENVCONTEXT.session) {

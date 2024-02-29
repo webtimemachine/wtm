@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useState,useRef } from 'react';
+import React, { Fragment, useContext, useState, useRef } from 'react';
 import { EnvContext } from '../helpers/EnvContext';
 import { getSetup } from '../helpers/Constants'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
@@ -6,7 +6,7 @@ import { Dialog, Transition } from '@headlessui/react'
 
 const ChangeApiURL = () => {
     const [open, setOpen] = useState(false)
-  
+
     const cancelButtonRef = useRef(null)
 
     const [ENVCONTEXT, setEnvContext] = useContext(EnvContext)
@@ -15,7 +15,7 @@ const ChangeApiURL = () => {
     const [serverUrlDisable, setServerUrlDisable] = useState(false)
 
     const changeServerUrl = (e) => {
-        if (e.key === "Enter") {
+        if (e.key === "Enter" || e.type === "click") {
             setServerUrlDisable(true)
             const parsedUrl = new URL(serverUrl)
             const url = `${parsedUrl.protocol}//${parsedUrl.hostname}`
@@ -24,12 +24,10 @@ const ChangeApiURL = () => {
                 if (data.version) {
                     ENVCONTEXT.supabase.auth.signOut("local");
                     setEnvContext({ ...ENVCONTEXT, API_URL: url, SUPABASE_URL: data.supabaseUrl, SUPABASE_ANON_KEY: data.supabaseAnonKey })
-                    console.log("Server URL changed to", ENVCONTEXT, data)
                 } else {
                     setOpen(true)
                 }
-            }).catch((error) => {
-                console.error("Error changing server URL", error)
+            }).catch(() => {
                 setServerUrlDisable(false)
                 setOpen(true)
             })
@@ -96,18 +94,26 @@ const ChangeApiURL = () => {
             <label htmlFor="apiurl" className="block text-sm font-medium leading-6 text-gray-900">
                 API Domain
             </label>
-            <div className="mt-2">
+            <div className="mt-2 relative flex flex-grow items-stretch focus-within:z-10">
                 <input
                     type="url"
                     name="apiurl"
                     id="apiurl"
                     disabled={serverUrlDisable}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-none rounded-l-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     placeholder="https://yourAPIdomain.com"
                     aria-describedby="email-description" value={serverUrl} onChange={(e) => {
                         setServerUrl(e.target.value)
                     }} onKeyDown={changeServerUrl}
                 />
+                <button
+                    onClick={changeServerUrl}
+                    disabled={serverUrlDisable}
+                    type="button"
+                    className="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                    Save
+                </button>
             </div>
             <p className="mt-2 text-sm text-gray-500" id="apiurl-description">
                 Set the API domain (https://yourAPIdomain.com) and press Enter. If it`s ok, you will be logged out.
