@@ -31,4 +31,4 @@ When reporting a bug, please provide a clear description of the expected behavio
 We're using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages.
 
 ## License
-By contributing, you agree that your contributions will be licensed under the project [License](LICENSE.md).
+By contributing, you agree that your contributions will be licensed under the project's license, which is AGPLv3. You can find more details in the [License](LICENSE.md) file.
