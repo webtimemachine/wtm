@@ -29,7 +29,8 @@ platform :ios do
       output_directory: "./build/",
       export_options: {
         provisioningProfiles: {
-          "com.ttm246.app": "match AppStore com.ttm246.app 1708013014"
+          "com.ttm246.app": "match AppStore com.ttm246.app 1708013014",
+          "com.ttm246.app.Extension": "match AppStore com.ttm246.app.Extension"
         }
       }
     )
