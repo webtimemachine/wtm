@@ -44,7 +44,8 @@ jobs:
         run: |
             echo "${{ secrets.ENCODED_CERTIFICATE }}" | base64 --decode --output cert.p12
             echo "${{ secrets.ENCODED_PROVISIONING_PROFILE_APP }}" | base64 --decode --output app.mobileprovision
-        
+            echo "${{ secrets.ENCODED_PROVISIONING_PROFILE_APP_EXTENSION }}" | base64 --decode --output extension.mobileprovision
+
             KEYCHAIN_PATH=$RUNNER_TEMP/my_temporary.keychain
             security create-keychain -p "${{ secrets.KEYCHAIN_PASSWORD }}" $KEYCHAIN_PATH
             security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
@@ -56,15 +57,18 @@ jobs:
         
             mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
             cp app.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+            cp extension.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
         env:
           ENCODED_CERTIFICATE: ${{ secrets.ENCODED_CERTIFICATE }}
           ENCODED_PROVISIONING_PROFILE_APP: ${{ secrets.ENCODED_PROVISIONING_PROFILE_APP }}
+          ENCODED_PROVISIONING_PROFILE_APP_EXTENSION: ${{ secrets.ENCODED_PROVISIONING_PROFILE_APP_EXTENSION }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
           P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
 
       - name: Execute Fastlane Match
         run: |
-            fastlane match appstore --readonly --app_identifier "com.ttm246.app" --git_url "https://${{ secrets.GH_TOKEN }}:x-oauth-basic@github.com/webtimemachine/wtm-cert.git"
+          fastlane match appstore --readonly --app_identifier "com.ttm246.app" --git_url "https://${{ secrets.GH_TOKEN }}:x-oauth-basic@github.com/webtimemachine/wtm-cert.git"
+          fastlane match appstore --readonly --app_identifier "com.ttm246.app.Extension" --git_url "https://${{ secrets.GH_TOKEN }}:x-oauth-basic@github.com/webtimemachine/wtm-cert.git"
         env:
             MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         working-directory: ./xcode-client
