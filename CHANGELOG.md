@@ -1,5 +1,24 @@
 # Changelog
 
+## Version 0.2.0
+
+### Features
+
+- **Fastfile Update**: The Fastfile has been updated to include configurations for building and signing the `ttm (iOS)` extension, streamlining the deployment process for new versions.
+
+- **Extension Integration in Workflow**: The `iOS Build and Deploy Workflow` now includes steps to build, sign, and deploy the `ttm (iOS) Extension`, ensuring that updates to the extension are smoothly integrated into our iOS application.
+
+### Continuous Integration Enhancements
+
+- **Enhanced Build Scripts**: Build scripts have been optimized for better performance and reliability, particularly for handling the `ttm (iOS) Extension`.
+
+- **Extended Testing**: Additional testing phases have been introduced, focusing on the integration and functionality of the `ttm (iOS) Extension` within the app.
+
+### Compatibility and Testing
+
+- **Extension Compatibility Testing**: The `ttm (iOS) Extension` has been rigorously tested across supported platforms to ensure seamless integration and functionality.
+
+
 ## Version 0.1.0
 
 ### Features
