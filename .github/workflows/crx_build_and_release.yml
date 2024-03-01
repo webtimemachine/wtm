@@ -43,7 +43,7 @@ jobs:
           npm install -g crx          
 
       - name: Zip build folder
-        run: zip -r build.zip /home/runner/work/wtm/wtm/react-app/build
+        run: zip -r build.zip ./react-app/build
 
       - name: Generate CRX file
         run: |  
