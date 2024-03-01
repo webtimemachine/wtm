@@ -45,6 +45,9 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
         if: startsWith(github.ref, 'refs/tags/v')
 
+      - name: Print extracted version
+        run: echo "Extracted version is ${{ env.VERSION }}"
+
       - name: Decode and Install Apple Provisioning Profiles and Certificate
         run: |
             echo "${{ secrets.ENCODED_CERTIFICATE }}" | base64 --decode --output cert.p12
