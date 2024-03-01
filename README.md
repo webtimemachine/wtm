@@ -19,4 +19,4 @@ The browser Extension for Safari and Chrome is built using [React](https://react
 
 - Check this guide to [Build the extension](./react-app/README.md#build-the-web-extension)
 - Test the extension [in Goolge Chrome](./react-app/README.md#test-the-extension-in-chrome)
-- Test the extension [in Safary](./react-app/README.md#test-the-extension-on-safari)
+- Test the extension [in Safari](./react-app/README.md#test-the-extension-on-safari)
