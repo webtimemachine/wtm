@@ -8,6 +8,7 @@ function classNames(...classes) {
 }
 
 import { DEFAULT_DEVICE_NAME, API_URL, getFromStorage, setInStorage } from "../helpers/Constants";
+import { LogsProvider } from "../helpers/LogsContext";
 
 // const tabs = [
 //   { name: 'All', href: '#', current: true, device: 'All'},
@@ -21,7 +22,7 @@ import { DEFAULT_DEVICE_NAME, API_URL, getFromStorage, setInStorage } from "../h
 export default function LogsMain() {
 
   const [ENVCONTEXT,] = useContext(EnvContext)
-
+  
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
@@ -102,7 +103,9 @@ export default function LogsMain() {
           </nav>
         </div>
       </div>
-      <Logs selectedDevice={selectedDevice} />
+      <LogsProvider>
+        <Logs selectedDevice={selectedDevice} />
+      </LogsProvider>
     </div>
   )
 

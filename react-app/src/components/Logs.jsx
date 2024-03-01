@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChrome, faFirefox, faEdge, faInternetExplorer, faSafari, faOpera } from '@fortawesome/free-brands-svg-icons'
 import moment from 'moment';
 import { EnvContext } from '../helpers/EnvContext';
+import { LogsContext } from '../helpers/LogsContext';
+import Pagination from './Pagination';
 
 fontawesome.library.add(faChrome, faFirefox, faEdge, faInternetExplorer, faSafari, faOpera);
 
@@ -14,8 +16,9 @@ export default function Logs(selectedDevice = undefined) {
 
     const [ENVCONTEXT,] = useContext(EnvContext);
 
+    const [logsContext, setLogsContext] = useContext(LogsContext);
+
     const [logs, setLogs] = useState([]);
-    const [currentPage,] = useState(0);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -23,7 +26,7 @@ export default function Logs(selectedDevice = undefined) {
             setLoading(true);
             if (ENVCONTEXT.session) {
                 try {
-                    const response = await fetch(ENVCONTEXT.API_URL + `/logs?offset=${currentPage * PAGESIZE}&deviceName=${selectedDevice.selectedDevice}`, {
+                    const response = await fetch(ENVCONTEXT.API_URL + `/logs?offset=${(logsContext.currentPage - 1) * PAGESIZE}&deviceName=${selectedDevice.selectedDevice}`, {
                         headers: new Headers({
                             "ngrok-skip-browser-warning": "69420",
                             "Authorization": ENVCONTEXT.session.access_token,
@@ -34,6 +37,7 @@ export default function Logs(selectedDevice = undefined) {
                     // console.log(data.urls.map((a) => { return a.osName }));
                     setLoading(false);
                     setLogs(data.urls);
+                    setLogsContext({ ...logsContext, totalItems: data.count });
                 } catch (error) {
                     console.error('Error:', error);
                 }
@@ -41,7 +45,7 @@ export default function Logs(selectedDevice = undefined) {
         }
 
         fetchUrls();
-    }, [currentPage, selectedDevice.selectedDevice]);
+    }, [logsContext.currentPage, selectedDevice.selectedDevice]);
 
     function deviceIcon(log) {
         let foundDevice = undefined;
@@ -116,7 +120,8 @@ export default function Logs(selectedDevice = undefined) {
         loading ? <div className="flex justify-center items-center h-32">
             <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-gray-900" />
         </div> :
-            <ul role="list" className="divide-y divide-gray-100">
+            <div>
+                <ul role="list" className="divide-y divide-gray-100">
                 {(filteredLogs || []).length === 0 && <li className="py-5">
                     <p className="text-sm leading-5 text-gray-500">No logs found yet. Set a device name and start browsing</p>
                 </li>}
@@ -162,5 +167,13 @@ export default function Logs(selectedDevice = undefined) {
                 ))}
 
             </ul>
+            {logsContext.totalItems > PAGESIZE ? <Pagination currentPage={logsContext.currentPage} totalPages={Math.ceil(logsContext.totalItems / PAGESIZE)} itemsPerPage={PAGESIZE} totalItems={logsContext.totalItems} paginate={(number)=>{
+                console.log("Paginate: ", number, Math.ceil(logsContext.totalItems / PAGESIZE), (number > Math.ceil(logsContext.totalItems / PAGESIZE) || number < 1));
+                if (number > Math.ceil(logsContext.totalItems / PAGESIZE) || number < 1) {
+                    return
+                }
+                setLogsContext({...logsContext, currentPage: number})
+            }} /> : null}
+            </div>
     )
 }
