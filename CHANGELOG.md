@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 1.0.0
+
+- **First stable version with pipelines working and expected**: Each new version will be uploaded entirely by the pipelines.
+
+- **Build and Release Extension zip**: This pipeline is responsible for building and releasing the extension in .zip file.
+
 ## Version 0.2.0
 
 ### Features
