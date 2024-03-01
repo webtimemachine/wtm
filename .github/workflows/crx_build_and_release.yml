@@ -26,11 +26,12 @@ jobs:
       - name: Install dependencies
         run: npm install
       
+      - name: Install zip
+        run: sudo apt-get install zip
+      
       - name: Setup .env file
         run: |
           echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" > ./.env
-          echo "REACT_APP_SUPABASE_URL=${{ secrets.REACT_APP_SUPABASE_URL }}" >> ./.env
-          echo "REACT_APP_SUPABASE_ANON_KEY=${{ secrets.REACT_APP_SUPABASE_ANON_KEY }}" >> ./.env
         working-directory: ./react-app
           
       - name: Build
@@ -41,12 +42,21 @@ jobs:
         run: |
           npm install -g crx          
 
+      - name: Zip build folder
+        run: zip -r build.zip /home/runner/work/wtm/wtm/react-app/build
+
       - name: Generate CRX file
         run: |  
           pwd     
           cd build
           crx pack
-     
+
+      - name: Upload Zip file
+        uses: actions/upload-artifact@v2
+        with:
+          name: extension
+          path: /home/runner/work/wtm/wtm/react-app/build.zip
+          
       - name: Upload CRX file
         uses: actions/upload-artifact@v2
         with:
