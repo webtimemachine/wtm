@@ -16,8 +16,8 @@ default_platform(:ios)
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
-  lane :beta do |options|
-    app_version = options[:version]
+  lane :beta do
+    app_version = ENV["VERSION"]
     increment_version_number(version_number: app_version) if app_version
     
     app_identifier = "com.ttm246.app"

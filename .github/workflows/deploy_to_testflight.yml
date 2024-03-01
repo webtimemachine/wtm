@@ -86,7 +86,7 @@ jobs:
           APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
         run: |
           echo "$APP_STORE_CONNECT_API_KEY" > api_key.json
-          fastlane beta version:${{ env.VERSION }}
+          fastlane beta
         working-directory: ./xcode-client
 
       - name: Get Release Upload URL
