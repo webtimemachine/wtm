@@ -74,7 +74,7 @@ export default function LogsMain() {
             name="current-tab"
             className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             defaultValue={tabs.find((tab) => tab.current)?.name}
-            onChange={(e) => { setSelectedDevice(e.target.value); tabs.forEach((eachTab) => eachTab.current = e.target.value === eachTab.device); console.log(e.target.value) }}
+            onChange={(e) => { setSelectedDevice(e.target.value); tabs.forEach((eachTab) => eachTab.current = e.target.value === eachTab.device);}}
           >
             {tabs.map((tab) => (
               <option key={tab.name}

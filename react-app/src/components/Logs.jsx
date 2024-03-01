@@ -168,7 +168,6 @@ export default function Logs(selectedDevice = undefined) {
 
             </ul>
             {logsContext.totalItems > PAGESIZE ? <Pagination currentPage={logsContext.currentPage} totalPages={Math.ceil(logsContext.totalItems / PAGESIZE)} itemsPerPage={PAGESIZE} totalItems={logsContext.totalItems} paginate={(number)=>{
-                console.log("Paginate: ", number, Math.ceil(logsContext.totalItems / PAGESIZE), (number > Math.ceil(logsContext.totalItems / PAGESIZE) || number < 1));
                 if (number > Math.ceil(logsContext.totalItems / PAGESIZE) || number < 1) {
                     return
                 }

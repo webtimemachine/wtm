@@ -91,6 +91,5 @@ if (!processing) {
 
 async function refreshAuth() {
   const { data, error } = await supabase.auth.refreshSession();
-  console.log('refreshAuth supabase', data, error);
   return data.session
 }

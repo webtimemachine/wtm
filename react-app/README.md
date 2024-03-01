@@ -44,13 +44,11 @@ npm run build
 
 In the folder called `react-app/build` you will have the unpacked version of the extension.
 
-You can use this build with testing purpouse. The repo has a pipeline that makes a `.crx` for you. Just enter on the secrets the `API_URL` and it should work.
-
 ## Test the extension in Chrome
 
-After building the extension, you'll end up with a folder called `react-app/build` with the unpacked version of the extension. You can use this build for testing purpouse. The repo has a pipeline that makes a `.crx` for you. Just enter on the secrets the `API_URL` and it should work.
+After building the extension, you'll end up with a folder called `react-app/build` with the unpacked version of the extension. You can use this build for testing purpouse. The repo has a pipeline that makes a `.crx` file and a `.zip` file for you. Just enter on the secrets the `API_URL` and it should work and follow the next step to install it.
 
-### Install the extension in Chrome
+### Install the extension in Chrome (using the .crx file)
 
 - Click on the **Settings** icon located in the top-right corner of your Chrome browser. It resembles three vertically aligned dots, also known as the 'hamburger' icon.
 
@@ -63,6 +61,18 @@ After building the extension, you'll end up with a folder called `react-app/buil
 - Click and hold the .crx file, then drag it onto the Extensions page. A confirmation dialog should appear asking if you want to add the extension. Click on the **Add extension** button to proceed.
 
 - Chrome will begin installing the extension. Once completed, you'll see a notification confirming the successful installation.
+
+### Install the extension in Chrome (using the .zip file)
+
+- Navigate to the **Extensions** page as described in the previous section.
+
+- Navigate to the location of the .zip file you wish to install. Unzip it where you want to let it installed (Desktop, for example)
+
+- Click on the **Load unpacked** button located in the top-left corner of the screen. This action opens a file selection dialog.
+
+- Select the folder where you had unziped and click on the **Open** button. Chrome will begin installing the extension.
+
+- Once completed, you'll see a notification confirming the successful installation. The extension should now be visible in your list of installed extensions.
 
 ## Test the extension on Safari
 

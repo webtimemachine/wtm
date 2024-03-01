@@ -34,7 +34,7 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
             <a
                 href="#"
                 className={(totalPages <= currentPage ? 'hidden' : '') + " inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"}
-                onClick={(e) => {console.log(e);e.preventDefault();paginate(currentPage+1)}}
+                onClick={(e) => {e.preventDefault();paginate(currentPage+1)}}
             >
                 Next
                 <ArrowLongRightIcon className="ml-3 h-5 w-5 text-gray-400" aria-hidden="true" />
