@@ -63,7 +63,7 @@ jobs:
           name: extension
           path: /home/runner/work/wtm/wtm/react-app/build/build.crx
 
-      - name: Download CRX file
+      - name: Download files
         uses: actions/download-artifact@v2
         with:
           name: extension
@@ -95,3 +95,14 @@ jobs:
           asset_path: "/home/runner/work/wtm/wtm/crx-files/build.crx"
           asset_name: build.crx
           asset_content_type: application/crx
+  
+      - name: Upload .zip to Release
+        uses: actions/upload-release-asset@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: "/home/runner/work/wtm/wtm/crx-files/build.zip"
+          asset_name: build.zip
+          asset_content_type: application/zip
