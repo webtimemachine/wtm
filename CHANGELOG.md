@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.0.1
+
+- **Minor fixes**
+
 ## Version 1.0.0
 
 - **First stable version with pipelines working and expected**: Each new version will be uploaded entirely by the pipelines.
