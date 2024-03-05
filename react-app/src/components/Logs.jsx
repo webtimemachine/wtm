@@ -34,7 +34,6 @@ export default function Logs(selectedDevice = undefined) {
                         }),
                     });
                     const data = await response.json();
-                    // console.log(data.urls.map((a) => { return a.osName }));
                     setLoading(false);
                     setLogs(data.urls);
                     setLogsContext({ ...logsContext, totalItems: data.count });
@@ -105,7 +104,6 @@ export default function Logs(selectedDevice = undefined) {
     const [filteredLogs, setFilteredLogs] = useState(logs);
 
     useEffect(() => {
-        // console.log(selectedDevice.selectedDevice);
         if (selectedDevice.selectedDevice == "All") {
             return setFilteredLogs((logs || []));
         }

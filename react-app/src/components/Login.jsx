@@ -1,30 +1,9 @@
 import { useContext } from 'react'
 import { inExtension } from '../helpers/Constants';
 import { EnvContext } from '../helpers/EnvContext'
-// import {
-//     Link
-// } from 'react-chrome-extension-router'
-// import Account from './Account'
-
 
 export default function Auth() {
     const [ENVCONTEXT,] = useContext(EnvContext)
-    // const [loading, setLoading] = useState(false)
-    // const [email, setEmail] = useState('')
-
-    // const handleLogin = async (event) => {
-    //     event.preventDefault()
-
-    //     setLoading(true)
-    //     const { error } = await supabase.auth.signInWithOtp({ email })
-
-    //     if (error) {
-    //         alert(error.error_description || error.message)
-    //     } else {
-    //         alert('Check your email for the login link!')
-    //     }
-    //     setLoading(false)
-    // }
     const handleProviderLogin = async (event, provider = "github") => {
 
         // eslint-disable-next-line no-undef
@@ -45,24 +24,6 @@ export default function Auth() {
                 <br></br>
                 {/* eslint-disable-next-line no-undef */}
                 {!inExtension ? <button onClick={handleProviderLogin}>Sign in with Github</button> : <a target='_BLANK' href={ENVCONTEXT.API_URL + "/login?provider=github"} rel="noreferrer">Sign in with Github</a>}
-                {/* <p className="description">Sign in via magic link with your email below</p>
-                <form className="form-widget" onSubmit={handleLogin}>
-                    <div>
-                        <input
-                            className="inputField"
-                            type="email"
-                            placeholder="Your email"
-                            value={email}
-                            required={true}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <button className={'button block'} disabled={loading}>
-                            {loading ? <span>Loading</span> : <span>Send magic link</span>}
-                        </button>
-                    </div>
-                </form> */}
             </div>
         </div>
     )

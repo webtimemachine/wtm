@@ -14,8 +14,6 @@ export default function AppRouter() {
       {!ENVCONTEXT || !ENVCONTEXT.supabase ? <h1 className="text-2xl font-semibold text-gray-900">Loading enviroment setup</h1> : <>
         {ENVCONTEXT.session ? <MainApp /> : <Login></Login>}
       </>}
-
-      {/* {session ? (inExtension ? <LogsMain /> : <h1>Please follow on the extension</h1>) : <Login message='Welcome to the extension' />} */}
     </div>
   </Router>;
 }

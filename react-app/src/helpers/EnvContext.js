@@ -42,7 +42,7 @@ export const EnvContextProvider = ({ children }) => {
     deviceName: DEFAULT_DEVICE_NAME,
   });
   useEffect(() => {
-    const cargarEstadoInicial = async () => {
+    const loadInitialState = async () => {
       const local_API_URL = (await getFromStorage('API_URL')) || API_URL;
       let local_SUPABASE_URL = (await getFromStorage('SUPABASE_URL'));
       let local_SUPABASE_ANON_KEY = (await getFromStorage('SUPABASE_ANON_KEY'))
@@ -56,7 +56,7 @@ export const EnvContextProvider = ({ children }) => {
       SetSupabaseInstance();
     };
 
-    cargarEstadoInicial();
+    loadInitialState();
   }, []);
   useEffect(() => {
     if (providerState.SUPABASE_URL && providerState.SUPABASE_ANON_KEY) {

@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 1.0.2
+
+- **Code review**
+
 ## Version 1.0.1
 
 - **Minor fixes**

@@ -6,18 +6,7 @@ import { EnvContext } from '../helpers/EnvContext';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
-import { DEFAULT_DEVICE_NAME, API_URL, getFromStorage, setInStorage } from "../helpers/Constants";
 import { LogsProvider } from "../helpers/LogsContext";
-
-// const tabs = [
-//   { name: 'All', href: '#', current: true, device: 'All'},
-//   { name: 'Mac', href: '#', current: false, device : 'Mac OS X'},
-//   { name: 'Windows', href: '#', current: false, device : 'Windows'},
-//   { name: 'iPhone', href: '#', current: false, device : 'iOS'},
-//   { name: 'iPad', href: '#', current: false, device : 'iOS'},
-//   { name: 'Android', href: '#', current: false, device : 'Android'}
-// ]
 
 export default function LogsMain() {
 

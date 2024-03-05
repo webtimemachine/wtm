@@ -2,16 +2,6 @@ import { setInStorage, getFromStorage,deleteFromStorage } from '../src/helpers/C
 
 import { createClient } from "@supabase/supabase-js";
 
-// chrome.storage.onChanged.addListener((changes, namespace) => {
-//   for (let [key, { oldValue, newValue }] of Object.entries(changes)) {
-//     console.log(
-//       `Storage key "${key}" in namespace "${namespace}" changed.`,
-//       `Old value was "${oldValue}", new value is "${newValue}".`
-//     );
-//   }
-// }
-// );
-
 async function loadSupabase(){
   const API_URL = await getFromStorage("API_URL")
   const SUPABASE_URL = await getFromStorage("SUPABASE_URL")
@@ -45,7 +35,6 @@ const {API_URL, supabase} = await loadSupabase()
 
 async function postData(data) {
   let deviceName = await getFromStorage('deviceName')
-  // console.log('[Normal use] get session', deviceName, data)
   if (data) {
     fetch(API_URL, {
       method: 'POST',
@@ -75,10 +64,7 @@ if (window.location.hash) {
   if (urlData.access_token && urlData.refresh_token) {
     processing = true;
     let loadedSession = await supabase.auth.setSession(urlData)
-    // console.log("[CONTENT] set session:", loadedSession);
-    if (loadedSession.error) {
-      // console.log("[CONTENT] error:", loadedSession.error);
-    } else {
+    if (!loadedSession.error) {
       postData(loadedSession.data.session);      
     }
   }
